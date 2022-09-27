@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 public class Main
 {
-
     public static void main(String[] args) throws IOException
     {
         System.out.println("[LOG] Bot started...\n");
@@ -19,7 +18,7 @@ public class Main
         BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            System.out.print("notifier@bot $ ");
+            System.out.print("notifier@bot: ");
 
             // TODO: Надо убедиться, что пользовательский ввод никак и ничего не сможет сломать
             String userInput = INPUT.readLine();
