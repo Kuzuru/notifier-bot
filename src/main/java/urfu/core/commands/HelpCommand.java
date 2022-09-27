@@ -1,7 +1,7 @@
 package urfu.core.commands;
 
-import urfu.core.CommandInitializer;
-import urfu.core.ICommand;
+import urfu.core.commands.init.CommandInitializer;
+import urfu.core.commands.init.ICommand;
 
 import java.util.HashMap;
 

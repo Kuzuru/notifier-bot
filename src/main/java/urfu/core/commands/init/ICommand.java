@@ -1,4 +1,4 @@
-package urfu.core;
+package urfu.core.commands.init;
 
 public interface ICommand
 {

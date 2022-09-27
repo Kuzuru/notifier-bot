@@ -1,6 +1,7 @@
-package urfu.core;
+package urfu.core.commands.init;
 
 import urfu.core.commands.HelpCommand;
+import urfu.core.commands.QuitCommand;
 import urfu.core.commands.VersionCommand;
 
 import java.util.HashMap;
@@ -11,8 +12,10 @@ public class CommandInitializer
     {
         HashMap<String, ICommand> COMMANDS = new HashMap<>();
 
+        // TODO: Попытаться упорядочить хэш-мапу
         COMMANDS.put("help", new HelpCommand());
         COMMANDS.put("version", new VersionCommand());
+        COMMANDS.put("quit", new QuitCommand());
 
         return COMMANDS;
     }
