@@ -4,7 +4,7 @@ public interface ICommand
 {
     void execute();
 
-    String getCommand();
-    String getFormat();
+    String getUsageFormat();
+
     String getInfo();
 }

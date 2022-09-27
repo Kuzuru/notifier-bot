@@ -6,28 +6,20 @@ public class VersionCommand implements ICommand
 {
     public void execute()
     {
-        System.out.println(this.getInfo());
+        // TODO: Сделать вставку значений из .env
+        System.out.println("v1.0.0\n");
     }
 
-    public String getCommand()
-    {
-        return "version";
-    }
-
-    public String getFormat()
+    public String getUsageFormat()
     {
         return "version";
     }
 
     public String getInfo()
     {
-        // TODO: Сделать вставку значений из .env
-
         return """
-                
-                Java version: ${java.version}
-                Build info: ${java.build}
-                Build date: ${java.date}
+                                
+                Выводит информацию о текущей версии Notifier Bot
                 """;
     }
 }

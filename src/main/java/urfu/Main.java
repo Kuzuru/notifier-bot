@@ -19,11 +19,9 @@ public class Main
         BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            // Приглашение к вводу
             System.out.print("notifier@bot $ ");
 
-            // TODO: Надо убедиться, что пользовательский ввод
-            // TODO: никак и ничего не сможет сломать
+            // TODO: Надо убедиться, что пользовательский ввод никак и ничего не сможет сломать
             String userInput = INPUT.readLine();
 
             ICommand command = COMMANDS.get(userInput);
