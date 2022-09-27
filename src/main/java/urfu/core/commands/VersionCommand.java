@@ -4,7 +4,7 @@ import urfu.core.ICommand;
 
 public class VersionCommand implements ICommand
 {
-    public void execute()
+    public void execute(String[] args)
     {
         // TODO: Сделать вставку значений из .env
         System.out.println("v1.0.0\n");

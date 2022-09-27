@@ -23,10 +23,13 @@ public class Main
             // TODO: Надо убедиться, что пользовательский ввод никак и ничего не сможет сломать
             String userInput = INPUT.readLine();
 
-            ICommand command = COMMANDS.get(userInput);
+            // TODO: Обрабатывать лишние пробелы, спецсимволы
+            String[] userInputArgs = userInput.split(" ");
+
+            ICommand command = COMMANDS.get(userInputArgs[0]);
 
             if (command != null) {
-                command.execute();
+                command.execute(userInputArgs);
             }
         }
     }

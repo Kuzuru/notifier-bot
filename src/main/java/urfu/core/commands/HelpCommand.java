@@ -7,13 +7,21 @@ import java.util.HashMap;
 
 public class HelpCommand implements ICommand
 {
-    public void execute()
+    public void execute(String[] args)
     {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        for (ICommand command : COMMANDS.values()) {
-            System.out.println(command.getUsageFormat() + command.getInfo());
+        if (args.length != 2) {
+            for (ICommand command : COMMANDS.values()) {
+                System.out.println("> " + command.getUsageFormat() + command.getInfo());
+            }
+
+            return;
         }
+
+        ICommand selectedCommand = COMMANDS.get(args[1]);
+
+        System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
     }
 
     public String getUsageFormat()

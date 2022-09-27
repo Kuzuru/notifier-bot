@@ -2,7 +2,7 @@ package urfu.core;
 
 public interface ICommand
 {
-    void execute();
+    void execute(String[] args);
 
     String getUsageFormat();
 
