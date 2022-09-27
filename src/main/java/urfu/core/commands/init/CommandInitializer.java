@@ -12,7 +12,6 @@ public class CommandInitializer
     {
         HashMap<String, ICommand> COMMANDS = new HashMap<>();
 
-        // TODO: Попытаться упорядочить хэш-мапу
         COMMANDS.put("help", new HelpCommand());
         COMMANDS.put("version", new VersionCommand());
         COMMANDS.put("quit", new QuitCommand());

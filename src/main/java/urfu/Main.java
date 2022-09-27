@@ -23,7 +23,7 @@ public class Main
 
                 String userInput = INPUT.readLine();
 
-                // TODO: Обрабатывать лишние пробелы, спецсимволы
+                userInput = userInput.trim().replaceAll(" +", " ");
                 String[] userInputArgs = userInput.split(" ");
 
                 ICommand command = COMMANDS.get(userInputArgs[0]);
