@@ -11,7 +11,7 @@ public class HelpCommand implements ICommand
     {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        if (args.length != 2) {
+        if (args.length != 2 || !COMMANDS.containsKey(args[1])) {
             for (ICommand command : COMMANDS.values()) {
                 System.out.println("> " + command.getUsageFormat() + command.getInfo());
             }
