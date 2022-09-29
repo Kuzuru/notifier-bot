@@ -23,6 +23,7 @@ public class Main
 
                 String userInput = INPUT.readLine();
 
+                // Обработка лишних пробелов во входной строке
                 userInput = userInput.trim().replaceAll(" +", " ");
                 String[] userInputArgs = userInput.split(" ");
 
