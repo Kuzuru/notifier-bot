@@ -1,6 +1,5 @@
 package urfu.core.commands;
 
-import urfu.Main;
 import urfu.core.commands.init.ICommand;
 
 public class VersionCommand implements ICommand
@@ -8,7 +7,7 @@ public class VersionCommand implements ICommand
     @Override
     public void execute(String[] args)
     {
-        System.out.println(Main.class.getPackage().getImplementationVersion() + "\n");
+        System.out.println("Notifier Bot v0.7.3\n");
     }
 
     @Override
