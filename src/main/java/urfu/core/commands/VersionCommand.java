@@ -1,20 +1,23 @@
 package urfu.core.commands;
 
+import urfu.Main;
 import urfu.core.commands.init.ICommand;
 
 public class VersionCommand implements ICommand
 {
+    @Override
     public void execute(String[] args)
     {
-        // TODO: Сделать вставку значений из .env
-        System.out.println("v1.0-SNAPSHOT\n");
+        System.out.println(Main.class.getPackage().getImplementationVersion() + "\n");
     }
 
+    @Override
     public String getUsageFormat()
     {
         return "version";
     }
 
+    @Override
     public String getInfo()
     {
         return """

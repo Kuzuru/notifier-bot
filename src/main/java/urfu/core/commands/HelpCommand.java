@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class HelpCommand implements ICommand
 {
+    @Override
     public void execute(String[] args)
     {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
@@ -24,11 +25,13 @@ public class HelpCommand implements ICommand
         System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
     }
 
+    @Override
     public String getUsageFormat()
     {
         return "help [command]";
     }
 
+    @Override
     public String getInfo()
     {
 
