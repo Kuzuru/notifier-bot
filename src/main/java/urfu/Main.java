@@ -5,7 +5,7 @@ import urfu.core.commands.init.ICommand;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Main
 {
@@ -13,7 +13,7 @@ public class Main
     {
         System.out.println("[LOG] Bot started...\n");
 
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+        LinkedHashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
         BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
 
