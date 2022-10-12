@@ -12,7 +12,6 @@ public class VersionCommandTest {
     void CheckVersion() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Version
         ICommand command = COMMANDS.get("version");
 
         if (command == null)
@@ -25,7 +24,6 @@ public class VersionCommandTest {
     void isCorrectUsageFormat() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Version
         ICommand command = COMMANDS.get("version");
         if (command == null)
             Assertions.fail("Could not find help command");
@@ -37,7 +35,6 @@ public class VersionCommandTest {
     void isCorrectGetInfo() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Version
         ICommand command = COMMANDS.get("version");
         if (command == null)
             Assertions.fail("Could not find help command");
@@ -46,6 +43,7 @@ public class VersionCommandTest {
                                 
                 Выводит информацию о текущей версии Notifier Bot
                 """;
+
         Assertions.assertEquals(s, command.getInfo());
     }
 }

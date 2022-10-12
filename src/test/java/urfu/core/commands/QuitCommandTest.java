@@ -12,7 +12,6 @@ public class QuitCommandTest {
     void CheckVersion() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Quit
         ICommand command = COMMANDS.get("quit");
 
         if (command == null)
@@ -25,7 +24,6 @@ public class QuitCommandTest {
     void isCorrectUsageFormat() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Quit
         ICommand command = COMMANDS.get("quit");
         if (command == null)
             Assertions.fail("Could not find help command");
@@ -37,7 +35,6 @@ public class QuitCommandTest {
     void isCorrectGetInfo() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём Quit
         ICommand command = COMMANDS.get("quit");
         if (command == null)
             Assertions.fail("Could not find help command");
@@ -46,6 +43,7 @@ public class QuitCommandTest {
                                 
                 Завершает работу бота
                 """;
+
         Assertions.assertEquals(s, command.getInfo());
     }
 }

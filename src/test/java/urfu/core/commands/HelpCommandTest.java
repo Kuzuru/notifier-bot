@@ -14,7 +14,6 @@ public class HelpCommandTest {
     void shouldNotShowHelpIfMoreThan2Args() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём HelpCommand
         ICommand command = COMMANDS.get("help");
 
         if (command == null)
@@ -49,7 +48,6 @@ public class HelpCommandTest {
     void isCorrectUsageFormat() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём HelpCommand
         ICommand command = COMMANDS.get("help");
 
         if (command == null)
@@ -62,7 +60,6 @@ public class HelpCommandTest {
     void isCorrectGetInfo() {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        // Берём HelpCommand
         ICommand command = COMMANDS.get("help");
 
         if (command == null)
@@ -74,6 +71,7 @@ public class HelpCommandTest {
                 При использовании опционального ввода конкретной команды
                 можно получить информацию о ней
                 """;
+
         Assertions.assertEquals(expectedOut, command.getInfo());
     }
 }
