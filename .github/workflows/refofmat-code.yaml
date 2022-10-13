@@ -16,4 +16,5 @@ jobs:
       - name: Google Java Format
         uses: axel-op/googlejavaformat-action@v3.6.0
         with:
+          githubToken: ${{ secrets.TOKEN }}
           args: "--skip-sorting-imports --replace"
