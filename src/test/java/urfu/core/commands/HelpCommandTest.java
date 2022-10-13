@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class HelpCommandTest {
   @Test
   void shouldNotShowHelpIfMoreThan2Args() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("help");
+    ICommand command = commands.get("help");
 
     if (command == null) Assertions.fail("Could not find help command");
 
@@ -36,7 +36,7 @@ public class HelpCommandTest {
 
     StringBuilder expectedOutput = new StringBuilder();
 
-    for (ICommand commandExpected : COMMANDS.values()) {
+    for (ICommand commandExpected : commands.values()) {
       expectedOutput
           .append("> ")
           .append(commandExpected.getUsageFormat())
@@ -49,9 +49,9 @@ public class HelpCommandTest {
 
   @Test
   void isCorrectUsageFormat() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("help");
+    ICommand command = commands.get("help");
 
     if (command == null) Assertions.fail("Could not find help command");
 
@@ -60,9 +60,9 @@ public class HelpCommandTest {
 
   @Test
   void isCorrectGetInfo() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("help");
+    ICommand command = commands.get("help");
 
     if (command == null) Assertions.fail("Could not find help command");
 

@@ -10,9 +10,9 @@ import java.util.HashMap;
 public class QuitCommandTest {
   @Test
   void CheckVersion() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("quit");
+    ICommand command = commands.get("quit");
 
     if (command == null) Assertions.fail("Could not find help command");
 
@@ -21,9 +21,9 @@ public class QuitCommandTest {
 
   @Test
   void isCorrectUsageFormat() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("quit");
+    ICommand command = commands.get("quit");
     if (command == null) Assertions.fail("Could not find help command");
 
     Assertions.assertEquals("quit", command.getUsageFormat());
@@ -31,9 +31,9 @@ public class QuitCommandTest {
 
   @Test
   void isCorrectGetInfo() {
-    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    ICommand command = COMMANDS.get("quit");
+    ICommand command = commands.get("quit");
     if (command == null) Assertions.fail("Could not find help command");
 
     StringBuilder sb = new StringBuilder();
