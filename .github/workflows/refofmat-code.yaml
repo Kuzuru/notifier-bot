@@ -13,8 +13,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+
       - name: Google Java Format
         uses: axel-op/googlejavaformat-action@v3.6.0
         with:
-          githubToken: ${{ secrets.TOKEN }}
           args: "--skip-sorting-imports --replace"
