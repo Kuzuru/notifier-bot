@@ -39,11 +39,12 @@ public class QuitCommandTest {
         if (command == null)
             Assertions.fail("Could not find help command");
 
-        String s = """
-                                
-                Завершает работу бота
-                """;
+        StringBuilder sb = new StringBuilder();
 
-        Assertions.assertEquals(s, command.getInfo());
+        sb.append("\n")
+            .append("Завершает работу бота")
+            .append("\n");
+
+        Assertions.assertEquals(sb.toString(), command.getInfo());
     }
 }

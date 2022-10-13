@@ -39,11 +39,12 @@ public class VersionCommandTest {
         if (command == null)
             Assertions.fail("Could not find help command");
 
-        String s = """
-                                
-                Выводит информацию о текущей версии Notifier Bot
-                """;
+        StringBuilder sb = new StringBuilder();
 
-        Assertions.assertEquals(s, command.getInfo());
+        sb.append("\n")
+            .append("Выводит информацию о текущей версии Notifier Bot")
+            .append("\n");
+
+        Assertions.assertEquals(sb.toString(), command.getInfo());
     }
 }

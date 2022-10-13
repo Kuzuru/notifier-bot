@@ -24,9 +24,12 @@ public class ClearCommand implements ICommand
     @Override
     public String getInfo()
     {
-        return """
-                                
-                Очищает консоль
-                """;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n")
+            .append("Очищает консоль")
+            .append("\n");
+
+        return sb.toString();
     }
 }
