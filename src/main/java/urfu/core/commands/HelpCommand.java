@@ -17,29 +17,29 @@ public class HelpCommand implements ICommand
                 System.out.println("> " + command.getUsageFormat() + command.getInfo());
             }
 
-            return;
-        }
-
-        ICommand selectedCommand = commands.get(args[1]);
-
-        System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
+      return;
     }
 
-    @Override
-    public String getUsageFormat()
-    {
-        return "help [command]";
-    }
+    ICommand selectedCommand = commands.get(args[1]);
 
-    @Override
-    public String getInfo()
-    {
+    System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
+  }
 
-        return """
-                                
-                Выводит информацию обо всех доступных командах
-                При использовании опционального ввода конкретной команды
-                можно получить информацию о ней
-                """;
-    }
+  @Override
+  public String getUsageFormat() {
+    return "help [command]";
+  }
+
+  @Override
+  public String getInfo() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("\n")
+        .append("Выводит информацию обо всех доступных командах\n")
+        .append("При использовании опционального ввода конкретной команды\n")
+        .append("можно получить информацию о ней")
+        .append("\n");
+
+    return sb.toString();
+  }
 }
