@@ -1,0 +1,19 @@
+name: Reformat code
+
+on:
+  push:
+    branches:
+      - main
+      - feat/ci-cd
+
+jobs:
+  reformat-code:
+    name: Reformat code using google style guide
+    runs-on: Ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Formatting code
+        run: |
+          echo hello world
