@@ -5,20 +5,22 @@ import urfu.core.commands.init.ICommand;
 
 import java.util.LinkedHashMap;
 
-public class HelpCommand implements ICommand {
-  @Override
-  public void execute(String[] args) {
-    LinkedHashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+public class HelpCommand implements ICommand
+{
+    @Override
+    public void execute(String[] args)
+    {
+        LinkedHashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    if (args.length != 2 || !COMMANDS.containsKey(args[1])) {
-      for (ICommand command : COMMANDS.values()) {
-        System.out.println("> " + command.getUsageFormat() + command.getInfo());
-      }
+        if (args.length != 2 || !commands.containsKey(args[1])) {
+            for (ICommand command : commands.values()) {
+                System.out.println("> " + command.getUsageFormat() + command.getInfo());
+            }
 
       return;
     }
 
-    ICommand selectedCommand = COMMANDS.get(args[1]);
+    ICommand selectedCommand = commands.get(args[1]);
 
     System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
   }
