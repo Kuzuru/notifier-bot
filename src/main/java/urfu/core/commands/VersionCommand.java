@@ -2,29 +2,23 @@ package urfu.core.commands;
 
 import urfu.core.commands.init.ICommand;
 
-public class VersionCommand implements ICommand
-{
-    @Override
-    public void execute(String[] args)
-    {
-        System.out.println("Notifier Bot v0.7.3\n");
-    }
+public class VersionCommand implements ICommand {
+  @Override
+  public void execute(String[] args) {
+    System.out.println("Notifier Bot v0.7.3\n");
+  }
 
-    @Override
-    public String getUsageFormat()
-    {
-        return "version";
-    }
+  @Override
+  public String getUsageFormat() {
+    return "version";
+  }
 
-    @Override
-    public String getInfo()
-    {
-        StringBuilder sb = new StringBuilder();
+  @Override
+  public String getInfo() {
+    StringBuilder sb = new StringBuilder();
 
-        sb.append("\n")
-            .append("Выводит информацию о текущей версии Notifier Bot")
-            .append("\n");
+    sb.append("\n").append("Выводит информацию о текущей версии Notifier Bot").append("\n");
 
-        return sb.toString();
-    }
+    return sb.toString();
+  }
 }

@@ -1,10 +1,9 @@
 package urfu.core.commands.init;
 
-public interface ICommand
-{
-    void execute(String[] args);
+public interface ICommand {
+  void execute(String[] args);
 
-    String getUsageFormat();
+  String getUsageFormat();
 
-    String getInfo();
+  String getInfo();
 }

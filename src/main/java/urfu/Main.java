@@ -7,33 +7,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
-        System.out.println("[LOG] Bot started...\n");
+public class Main {
+  public static void main(String[] args) {
+    System.out.println("[LOG] Bot started...\n");
 
-        LinkedHashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    LinkedHashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
 
-        try {
-            while (true) {
-                System.out.print("notifier@bot: ");
+    try {
+      while (true) {
+        System.out.print("notifier@bot: ");
 
-                String userInput = INPUT.readLine();
+        String userInput = INPUT.readLine();
 
-                // Обработка лишних пробелов во входной строке
-                userInput = userInput.trim().replaceAll(" +", " ");
-                String[] userInputArgs = userInput.split(" ");
+        // Обработка лишних пробелов во входной строке
+        userInput = userInput.trim().replaceAll(" +", " ");
+        String[] userInputArgs = userInput.split(" ");
 
-                ICommand command = COMMANDS.get(userInputArgs[0]);
+        ICommand command = COMMANDS.get(userInputArgs[0]);
 
-                if (command != null)
-                    command.execute(userInputArgs);
-            }
-        } catch (Exception e) {
-            System.out.println("[ERR] Got exception while waiting user input: " + e.getMessage());
-        }
+        if (command != null) command.execute(userInputArgs);
+      }
+    } catch (Exception e) {
+      System.out.println("[ERR] Got exception while waiting user input: " + e.getMessage());
     }
+  }
 }

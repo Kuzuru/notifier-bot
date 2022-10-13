@@ -10,69 +10,70 @@ import java.io.PrintStream;
 import java.util.HashMap;
 
 public class HelpCommandTest {
-    @Test
-    void shouldNotShowHelpIfMoreThan2Args() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+  @Test
+  void shouldNotShowHelpIfMoreThan2Args() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        ICommand command = COMMANDS.get("help");
+    ICommand command = COMMANDS.get("help");
 
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        String[] args = new String[3];
+    String[] args = new String[3];
 
-        args[0] = "help";
-        args[1] = "help";
-        args[2] = "abra";
+    args[0] = "help";
+    args[1] = "help";
+    args[2] = "abra";
 
-        ByteArrayOutputStream CatchOut = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(CatchOut);
-        PrintStream old = System.out;
-        System.setOut(ps);
+    ByteArrayOutputStream CatchOut = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(CatchOut);
+    PrintStream old = System.out;
+    System.setOut(ps);
 
-        command.execute(args);
+    command.execute(args);
 
-        System.out.flush();
-        System.setOut(old);
+    System.out.flush();
+    System.setOut(old);
 
-        StringBuilder expectedOutput = new StringBuilder();
+    StringBuilder expectedOutput = new StringBuilder();
 
-        for (ICommand commandExpected : COMMANDS.values()) {
-            expectedOutput.append("> ").append(commandExpected.getUsageFormat()).append(commandExpected.getInfo()).append("\r\n");
-        }
-
-        Assertions.assertEquals(expectedOutput.toString(), CatchOut.toString());
+    for (ICommand commandExpected : COMMANDS.values()) {
+      expectedOutput
+          .append("> ")
+          .append(commandExpected.getUsageFormat())
+          .append(commandExpected.getInfo())
+          .append("\r\n");
     }
 
-    @Test
-    void isCorrectUsageFormat() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    Assertions.assertEquals(expectedOutput.toString(), CatchOut.toString());
+  }
 
-        ICommand command = COMMANDS.get("help");
+  @Test
+  void isCorrectUsageFormat() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    ICommand command = COMMANDS.get("help");
 
-        Assertions.assertEquals("help [command]", command.getUsageFormat());
-    }
+    if (command == null) Assertions.fail("Could not find help command");
 
-    @Test
-    void isCorrectGetInfo() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+    Assertions.assertEquals("help [command]", command.getUsageFormat());
+  }
 
-        ICommand command = COMMANDS.get("help");
+  @Test
+  void isCorrectGetInfo() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    ICommand command = COMMANDS.get("help");
 
-        StringBuilder sb = new StringBuilder();
+    if (command == null) Assertions.fail("Could not find help command");
 
-        sb.append("\n")
-            .append("Выводит информацию обо всех доступных командах\n")
-            .append("При использовании опционального ввода конкретной команды\n")
-            .append("можно получить информацию о ней")
-            .append("\n");
+    StringBuilder sb = new StringBuilder();
 
-        Assertions.assertEquals(sb.toString(), command.getInfo());
-    }
+    sb.append("\n")
+        .append("Выводит информацию обо всех доступных командах\n")
+        .append("При использовании опционального ввода конкретной команды\n")
+        .append("можно получить информацию о ней")
+        .append("\n");
+
+    Assertions.assertEquals(sb.toString(), command.getInfo());
+  }
 }

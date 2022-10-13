@@ -8,43 +8,38 @@ import urfu.core.commands.init.ICommand;
 import java.util.HashMap;
 
 public class QuitCommandTest {
-    @Test
-    void CheckVersion() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+  @Test
+  void CheckVersion() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        ICommand command = COMMANDS.get("quit");
+    ICommand command = COMMANDS.get("quit");
 
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        // TODO: добавить тест метода Execute()
-    }
+    // TODO: добавить тест метода Execute()
+  }
 
-    @Test
-    void isCorrectUsageFormat() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+  @Test
+  void isCorrectUsageFormat() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        ICommand command = COMMANDS.get("quit");
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    ICommand command = COMMANDS.get("quit");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        Assertions.assertEquals("quit", command.getUsageFormat());
-    }
+    Assertions.assertEquals("quit", command.getUsageFormat());
+  }
 
-    @Test
-    void isCorrectGetInfo() {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+  @Test
+  void isCorrectGetInfo() {
+    HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        ICommand command = COMMANDS.get("quit");
-        if (command == null)
-            Assertions.fail("Could not find help command");
+    ICommand command = COMMANDS.get("quit");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
 
-        sb.append("\n")
-            .append("Завершает работу бота")
-            .append("\n");
+    sb.append("\n").append("Завершает работу бота").append("\n");
 
-        Assertions.assertEquals(sb.toString(), command.getInfo());
-    }
+    Assertions.assertEquals(sb.toString(), command.getInfo());
+  }
 }
