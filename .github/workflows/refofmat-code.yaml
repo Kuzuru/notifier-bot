@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: 18
           distribution: temurin
-          cache: maven
+          cache: gradle
 
       - name: Google Java Format
         uses: axel-op/googlejavaformat-action@v3.6.0
