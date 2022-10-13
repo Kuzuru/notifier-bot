@@ -11,13 +11,13 @@ public class CommandInitializer
 {
     public static LinkedHashMap<String, ICommand> getAvailableCommands()
     {
-        LinkedHashMap<String, ICommand> COMMANDS = new LinkedHashMap<>();
+        LinkedHashMap<String, ICommand> commands = new LinkedHashMap<>();
 
-        COMMANDS.put("help", new HelpCommand());
-        COMMANDS.put("version", new VersionCommand());
-        COMMANDS.put("clear", new ClearCommand());
-        COMMANDS.put("quit", new QuitCommand());
+        commands.put("help", new HelpCommand());
+        commands.put("version", new VersionCommand());
+        commands.put("clear", new ClearCommand());
+        commands.put("quit", new QuitCommand());
 
-        return COMMANDS;
+        return commands;
     }
 }
