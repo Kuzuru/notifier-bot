@@ -15,6 +15,8 @@ jobs:
 
       - name: Setup Java
         uses: actions/setup-java@v3
+        with:
+          java-version: 18
 
       - name: Google Java Format
         uses: axel-op/googlejavaformat-action@v3.6.0
