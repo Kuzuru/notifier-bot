@@ -18,3 +18,5 @@ jobs:
 
       - name: Google Java Format
         uses: axel-op/googlejavaformat-action@v3.6.0
+        with:
+          args: "--set-exit-if-changed --skip-reflowing-long-strings"
