@@ -65,13 +65,14 @@ public class HelpCommandTest {
         if (command == null)
             Assertions.fail("Could not find help command");
 
-        String expectedOut = """
-                                
-                Выводит информацию обо всех доступных командах
-                При использовании опционального ввода конкретной команды
-                можно получить информацию о ней
-                """;
+        StringBuilder sb = new StringBuilder();
 
-        Assertions.assertEquals(expectedOut, command.getInfo());
+        sb.append("\n")
+            .append("Выводит информацию обо всех доступных командах\n")
+            .append("При использовании опционального ввода конкретной команды\n")
+            .append("можно получить информацию о ней")
+            .append("\n");
+
+        Assertions.assertEquals(sb.toString(), command.getInfo());
     }
 }
