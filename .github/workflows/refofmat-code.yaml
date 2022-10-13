@@ -1,5 +1,3 @@
-name: "Reformat code"
-
 on:
   push:
     branches:
@@ -11,14 +9,12 @@ on:
 
 jobs:
   reformat-code:
-    name: "Reformat code"
+    name: Reformat code
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Check out repository'
+      - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: "Formatting code"
-        uses: axel-op/googlejavaformat-action@v3
-        with:
-          args: "--replace"
+      - name: Google Java Format
+        uses: axel-op/googlejavaformat-action@v3.6.0
