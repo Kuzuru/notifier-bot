@@ -38,7 +38,7 @@ public class HelpCommandTest {
         StringBuilder expectedOutput = new StringBuilder();
 
         for (ICommand commandExpected : COMMANDS.values()) {
-            expectedOutput.append("> ").append(commandExpected.getUsageFormat()).append(commandExpected.getInfo()).append("\n");
+            expectedOutput.append("> ").append(commandExpected.getUsageFormat()).append(commandExpected.getInfo()).append("\r\n");
         }
 
         Assertions.assertEquals(expectedOutput.toString(), CatchOut.toString());

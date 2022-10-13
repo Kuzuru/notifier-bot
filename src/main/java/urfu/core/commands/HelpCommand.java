@@ -34,12 +34,14 @@ public class HelpCommand implements ICommand
     @Override
     public String getInfo()
     {
+        StringBuilder sb = new StringBuilder();
 
-        return """
-                                
-                Выводит информацию обо всех доступных командах
-                При использовании опционального ввода конкретной команды
-                можно получить информацию о ней
-                """;
+        sb.append("\n")
+            .append("Выводит информацию обо всех доступных командах\n")
+            .append("При использовании опционального ввода конкретной команды\n")
+            .append("можно получить информацию о ней")
+            .append("\n");
+
+        return sb.toString();
     }
 }
