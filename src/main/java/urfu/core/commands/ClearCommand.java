@@ -1,29 +1,39 @@
 package urfu.core.commands;
 
+import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
-public class ClearCommand implements ICommand {
-  @Override
-  public void execute(String[] args) {
-    // 033    -> ESC
-    // [H     -> Передвижение курсора
-    // 033[2J -> В самое начало, затирая всё на пути
-    System.out.print("\033[H\033[2J");
+public class ClearCommand extends DefaultCommand implements ICommand
+{
+    public ClearCommand(int minArgs)
+    {
+        super(minArgs);
+    }
 
-    System.out.flush();
-  }
+    @Override
+    public void execute(String[] args)
+    {
+        // 033    -> ESC
+        // [H     -> Передвижение курсора
+        // 033[2J -> В самое начало, затирая всё на пути
+        System.out.print("\033[H\033[2J");
 
-  @Override
-  public String getUsageFormat() {
-    return "clear";
-  }
+        System.out.flush();
+    }
 
-  @Override
-  public String getInfo() {
-    StringBuilder sb = new StringBuilder();
+    @Override
+    public String getUsageFormat()
+    {
+        return "clear";
+    }
 
-    sb.append("\n").append("Очищает консоль").append("\n");
+    @Override
+    public String getInfo()
+    {
+      StringBuilder sb = new StringBuilder();
 
-    return sb.toString();
-  }
+      sb.append("\n").append("Очищает консоль").append("\n");
+
+      return sb.toString();
+    }
 }

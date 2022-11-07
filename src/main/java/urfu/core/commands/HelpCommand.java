@@ -4,7 +4,7 @@ import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 public class HelpCommand extends DefaultCommand implements ICommand
 {
@@ -16,20 +16,20 @@ public class HelpCommand extends DefaultCommand implements ICommand
     @Override
     public void execute(String[] args)
     {
-        HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
+        HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-    if (args.length != 2 || !commands.containsKey(args[1])) {
-      for (ICommand command : commands.values()) {
-        System.out.println("> " + command.getUsageFormat() + command.getInfo());
-      }
+        if (args.length != 2 || !commands.containsKey(args[1])) {
+            for (ICommand command : commands.values()) {
+                System.out.println("> " + command.getUsageFormat() + command.getInfo());
+            }
 
-      return;
+            return;
+        }
+
+        ICommand selectedCommand = commands.get(args[1]);
+
+        System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
     }
-
-    ICommand selectedCommand = commands.get(args[1]);
-
-    System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
-  }
 
     @Override
     public String getUsageFormat()
@@ -40,12 +40,14 @@ public class HelpCommand extends DefaultCommand implements ICommand
     @Override
     public String getInfo()
     {
-    sb.append("\n")
-        .append("Выводит информацию обо всех доступных командах\n")
-        .append("При использовании опционального ввода конкретной команды\n")
-        .append("можно получить информацию о ней")
-        .append("\n");
+        StringBuilder sb = new StringBuilder();
 
-    return sb.toString();
-  }
+        sb.append("\n")
+                .append("Выводит информацию обо всех доступных командах\n")
+                .append("При использовании опционального ввода конкретной команды\n")
+                .append("можно получить информацию о ней")
+                .append("\n");
+
+        return sb.toString();
+    }
 }

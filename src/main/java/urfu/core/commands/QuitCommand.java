@@ -26,9 +26,10 @@ public class QuitCommand extends DefaultCommand implements ICommand
     @Override
     public String getInfo()
     {
-        return """
-                
-                Завершает работу бота
-                """;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n").append("Завершает работу бота").append("\n");
+
+        return sb.toString();
     }
 }

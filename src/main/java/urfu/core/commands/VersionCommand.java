@@ -26,9 +26,10 @@ public class VersionCommand extends DefaultCommand implements ICommand
     @Override
     public String getInfo()
     {
-        return """
-                                
-                Выводит информацию о текущей версии Notifier Bot
-                """;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n").append("Выводит информацию о текущей версии Notifier Bot").append("\n");
+
+        return sb.toString();
     }
 }

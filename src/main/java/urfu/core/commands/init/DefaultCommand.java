@@ -9,7 +9,8 @@ public class DefaultCommand implements ICommand
         this.minArgs = minArgs;
     }
 
-    public int getMinArgs() {
+    public int getMinArgs()
+    {
         return this.minArgs;
     }
 
@@ -39,9 +40,7 @@ public class DefaultCommand implements ICommand
 
     public String getInfo()
     {
-        return """
-                                
-                Описание команды
-                """;
+
+        return "\n" + "Описание команды" + "\n";
     }
 }
