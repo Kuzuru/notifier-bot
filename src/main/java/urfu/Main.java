@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class Main
 {
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args)
     {
         System.out.println("[LOG] Bot started...\n");
@@ -30,7 +31,7 @@ public class Main
                 ICommand command = COMMANDS.get(userInputArgs[0]);
 
                 if (command != null)
-                    command.execute(userInputArgs);
+                    command.safeArgsExecute(userInputArgs);
             }
         } catch (Exception e) {
             System.out.println("[ERR] Got exception while waiting user input: " + e.getMessage());
