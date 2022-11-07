@@ -12,9 +12,9 @@ public class CommandInitializer
     {
         HashMap<String, ICommand> COMMANDS = new HashMap<>();
 
-        COMMANDS.put("help", new HelpCommand());
-        COMMANDS.put("version", new VersionCommand());
-        COMMANDS.put("quit", new QuitCommand());
+        COMMANDS.put("help", new HelpCommand(0));
+        COMMANDS.put("version", new VersionCommand(0));
+        COMMANDS.put("quit", new QuitCommand(0));
 
         return COMMANDS;
     }
