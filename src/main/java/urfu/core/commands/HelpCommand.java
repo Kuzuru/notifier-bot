@@ -4,7 +4,7 @@ import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class HelpCommand extends DefaultCommand implements ICommand
 {
@@ -18,18 +18,18 @@ public class HelpCommand extends DefaultCommand implements ICommand
     {
         HashMap<String, ICommand> COMMANDS = CommandInitializer.getAvailableCommands();
 
-        if (args.length != 2 || !COMMANDS.containsKey(args[1])) {
-            for (ICommand command : COMMANDS.values()) {
-                System.out.println("> " + command.getUsageFormat() + command.getInfo());
-            }
+    if (args.length != 2 || !commands.containsKey(args[1])) {
+      for (ICommand command : commands.values()) {
+        System.out.println("> " + command.getUsageFormat() + command.getInfo());
+      }
 
-            return;
-        }
-
-        ICommand selectedCommand = COMMANDS.get(args[1]);
-
-        System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
+      return;
     }
+
+    ICommand selectedCommand = commands.get(args[1]);
+
+    System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
+  }
 
     @Override
     public String getUsageFormat()
@@ -40,12 +40,12 @@ public class HelpCommand extends DefaultCommand implements ICommand
     @Override
     public String getInfo()
     {
+    sb.append("\n")
+        .append("Выводит информацию обо всех доступных командах\n")
+        .append("При использовании опционального ввода конкретной команды\n")
+        .append("можно получить информацию о ней")
+        .append("\n");
 
-        return """
-                                
-                Выводит информацию обо всех доступных командах
-                При использовании опционального ввода конкретной команды
-                можно получить информацию о ней
-                """;
-    }
+    return sb.toString();
+  }
 }
