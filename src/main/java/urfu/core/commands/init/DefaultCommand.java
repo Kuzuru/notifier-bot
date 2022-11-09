@@ -9,12 +9,12 @@ public class DefaultCommand implements ICommand
         this.minArgs = minArgs;
     }
 
-    public int getMinArgs()
+    final public int getMinArgs()
     {
         return this.minArgs;
     }
 
-    public void safeArgsExecute(String[] args)
+    final public void safeArgsExecute(String[] args)
     {
         String commandName = args[0];
 
@@ -40,7 +40,10 @@ public class DefaultCommand implements ICommand
 
     public String getInfo()
     {
+        StringBuilder sb = new StringBuilder();
 
-        return "\n" + "Описание команды" + "\n";
+        sb.append("\n").append("Описание команды").append("\n");
+
+        return sb.toString();
     }
 }
