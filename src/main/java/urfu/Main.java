@@ -2,6 +2,7 @@ package urfu;
 
 import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.ICommand;
+import urfu.core.config.ConfigInitializer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +11,8 @@ import java.util.LinkedHashMap;
 public class Main {
   public static void main(String[] args) {
     System.out.println("[LOG] Bot started...\n");
+
+    ConfigInitializer.load();
 
     LinkedHashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
