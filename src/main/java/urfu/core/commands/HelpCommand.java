@@ -6,48 +6,43 @@ import urfu.core.commands.init.ICommand;
 
 import java.util.HashMap;
 
-public class HelpCommand extends DefaultCommand implements ICommand
-{
-    public HelpCommand(int minArgs)
-    {
-        super(minArgs);
+public class HelpCommand extends DefaultCommand implements ICommand {
+  public HelpCommand(int minArgs) {
+    super(minArgs);
+  }
+
+  @Override
+  public void execute(String[] args) {
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+
+    if (args.length != 2 || !commands.containsKey(args[1])) {
+      for (ICommand command : commands.values()) {
+        System.out.println("> " + command.getUsageFormat() + command.getInfo());
+      }
+
+      return;
     }
 
-    @Override
-    public void execute(String[] args)
-    {
-        HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    ICommand selectedCommand = commands.get(args[1]);
 
-        if (args.length != 2 || !commands.containsKey(args[1])) {
-            for (ICommand command : commands.values()) {
-                System.out.println("> " + command.getUsageFormat() + command.getInfo());
-            }
+    System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
+  }
 
-            return;
-        }
+  @Override
+  public String getUsageFormat() {
+    return "help [command]";
+  }
 
-        ICommand selectedCommand = commands.get(args[1]);
+  @Override
+  public String getInfo() {
+    StringBuilder sb = new StringBuilder();
 
-        System.out.println("> " + selectedCommand.getUsageFormat() + selectedCommand.getInfo());
-    }
+    sb.append("\n")
+        .append("Выводит информацию обо всех доступных командах\n")
+        .append("При использовании опционального ввода конкретной команды\n")
+        .append("можно получить информацию о ней")
+        .append("\n");
 
-    @Override
-    public String getUsageFormat()
-    {
-        return "help [command]";
-    }
-
-    @Override
-    public String getInfo()
-    {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\n")
-                .append("Выводит информацию обо всех доступных командах\n")
-                .append("При использовании опционального ввода конкретной команды\n")
-                .append("можно получить информацию о ней")
-                .append("\n");
-
-        return sb.toString();
-    }
+    return sb.toString();
+  }
 }
