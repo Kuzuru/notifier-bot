@@ -1,25 +1,35 @@
 package urfu.core.commands;
 
+import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
-public class QuitCommand implements ICommand {
-  @Override
-  public void execute(String[] args) {
-    System.out.println("[LOG] Shutting down...");
-    System.exit(0);
-  }
+public class QuitCommand extends DefaultCommand implements ICommand
+{
+    public QuitCommand(int minArgs)
+    {
+        super(minArgs);
+    }
 
-  @Override
-  public String getUsageFormat() {
-    return "quit";
-  }
+    @Override
+    public void execute(String[] args)
+    {
+        System.out.println("[LOG] Shutting down...");
+        System.exit(0);
+    }
 
-  @Override
-  public String getInfo() {
-    StringBuilder sb = new StringBuilder();
+    @Override
+    public String getUsageFormat()
+    {
+        return "quit";
+    }
 
-    sb.append("\n").append("Завершает работу бота").append("\n");
+    @Override
+    public String getInfo()
+    {
+        StringBuilder sb = new StringBuilder();
 
-    return sb.toString();
-  }
+        sb.append("\n").append("Завершает работу бота").append("\n");
+
+        return sb.toString();
+    }
 }

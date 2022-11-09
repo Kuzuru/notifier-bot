@@ -1,9 +1,14 @@
 package urfu.core.commands.init;
 
-public interface ICommand {
-  void execute(String[] args);
+public interface ICommand
+{
+    int getMinArgs();
 
-  String getUsageFormat();
+    void safeArgsExecute(String[] args);
 
-  String getInfo();
+    void execute(String[] args);
+
+    String getUsageFormat();
+
+    String getInfo();
 }
