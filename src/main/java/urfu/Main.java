@@ -2,6 +2,7 @@ package urfu;
 
 import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.ICommand;
+import urfu.core.config.ConfigInitializer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,6 +14,8 @@ public class Main
     public static void main(String[] args)
     {
         System.out.println("[LOG] Bot started...\n");
+
+        ConfigInitializer.load();
 
         HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
