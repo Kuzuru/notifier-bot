@@ -2,7 +2,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/author-Kuzuru%20%26%20LT-blue" alt="author: Kuzuru%26LT">
   <img src="https://img.shields.io/npm/l/apache" alt="license: MIT">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="version: 1.0.0">
+  <img src="https://img.shields.io/badge/version-1.7.3-blue" alt="version: 1.0.0">
  </p>
 
 ## Описание
