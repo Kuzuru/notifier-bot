@@ -5,48 +5,9 @@ import org.junit.jupiter.api.Test;
 import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.ICommand;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.HashMap;
 
 public class HelpCommandTest {
-  @Test
-  void shouldNotShowHelpIfMoreThan2Args() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
-
-    ICommand command = commands.get("help");
-
-    if (command == null) Assertions.fail("Could not find help command");
-
-    String[] args = new String[3];
-
-    args[0] = "help";
-    args[1] = "help";
-    args[2] = "abra";
-
-    ByteArrayOutputStream CatchOut = new ByteArrayOutputStream();
-    PrintStream ps = new PrintStream(CatchOut);
-    PrintStream old = System.out;
-    System.setOut(ps);
-
-    command.execute(args);
-
-    System.out.flush();
-    System.setOut(old);
-
-    StringBuilder expectedOutput = new StringBuilder();
-
-    for (ICommand commandExpected : commands.values()) {
-      expectedOutput
-          .append("> ")
-          .append(commandExpected.getUsageFormat())
-          .append(commandExpected.getInfo())
-          .append("\r\n");
-    }
-
-    Assertions.assertEquals(expectedOutput.toString(), CatchOut.toString());
-  }
-
   @Test
   void isCorrectUsageFormat() {
     HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
