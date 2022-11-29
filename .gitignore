@@ -132,4 +132,8 @@ modules.xml
 hs_err_pid*
 replay_pid*
 
+# Environment variables
 .env
+
+# Postgres DB
+pg_data
