@@ -19,7 +19,7 @@ RUN gradle fatJar
 
 # Actual container
 FROM openjdk:17-alpine
-ENV ARTIFACT_NAME=notifier-bot-all-0.1.0-SNAPSHOT.jar
+ENV ARTIFACT_NAME=notifier-bot-all.jar
 ENV APP_HOME=/usr/app
 
 WORKDIR $APP_HOME
