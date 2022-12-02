@@ -3,7 +3,18 @@ plugins {
 }
 
 group "urfu"
-version "0.1.0"
+
+file(".env").readLines().each() {
+    if (!it.isEmpty() && !it.startsWith("#")) {
+        def pos = it.indexOf("=")
+        def key = it.substring(0, pos)
+        def value = it.substring(pos + 1)
+
+        if (System.getenv(key) == null && key == "VERSION") {
+            version "${value}"
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -20,12 +31,12 @@ dependencies {
 task fatJar(type: Jar) {
     manifest {
         attributes (
-                'Main-Class': 'urfu.Main',
+                "Main-Class": "urfu.Main",
                 "Class-Path": "/libs/*.jar; /dependencies/*.jar"
         )
     }
 
-    baseName = project.name + '-all'
+    baseName = project.name + "-all"
 
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
