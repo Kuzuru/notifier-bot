@@ -15,8 +15,6 @@ public class QuitCommandTest {
     ICommand command = commands.get("quit");
 
     if (command == null) Assertions.fail("Could not find help command");
-
-    // TODO: добавить тест метода Execute()
   }
 
   @Test
