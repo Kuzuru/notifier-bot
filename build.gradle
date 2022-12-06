@@ -18,6 +18,8 @@ dependencies {
     implementation "org.glassfish.jaxb:jaxb-runtime:4.0.0"
     implementation "org.postgresql:postgresql:42.5.1"
 
+    implementation 'org.hibernate:hibernate-c3p0:6.1.5.Final'
+
     compileOnly "org.projectlombok:lombok:1.18.24"
     annotationProcessor "org.projectlombok:lombok:1.18.24"
 
