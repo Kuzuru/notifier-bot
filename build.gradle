@@ -17,8 +17,10 @@ dependencies {
 }
 
 task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     manifest {
-        attributes (
+        attributes(
                 "Main-Class": "urfu.Main",
                 "Class-Path": "/libs/*.jar; /dependencies/*.jar"
         )
