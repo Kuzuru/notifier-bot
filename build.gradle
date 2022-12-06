@@ -10,10 +10,22 @@ repositories {
 }
 
 dependencies {
+    // Dotenv
+    implementation "io.github.cdimascio:dotenv-java:2.3.1"
+
+    // Database dependencies
+    implementation "org.hibernate:hibernate-core-jakarta:5.6.14.Final"
+    implementation "org.glassfish.jaxb:jaxb-runtime:4.0.0"
+    implementation "org.postgresql:postgresql:42.5.1"
+
+    compileOnly "org.projectlombok:lombok:1.18.24"
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+
+    // Unit Testing dependencies
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.0"
     testImplementation "org.junit.jupiter:junit-jupiter:5.8.1"
+
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.0"
-    implementation 'io.github.cdimascio:dotenv-java:2.3.1'
 }
 
 task fatJar(type: Jar) {
