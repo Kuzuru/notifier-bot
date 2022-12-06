@@ -23,8 +23,8 @@ ENV ARTIFACT_NAME=notifier-bot-all.jar
 ENV APP_HOME=/usr/app
 
 WORKDIR $APP_HOME
-COPY --from=BUILD_IMAGE $APP_HOME .
+COPY --from=BUILD_IMAGE $APP_HOME/build/libs/${ARTIFACT_NAME} .
 COPY --from=BUILD_IMAGE $APP_HOME/.gradle .gradle
 COPY --from=BUILD_IMAGE $APP_HOME/.env .env
 
-ENTRYPOINT java -jar "build/libs/${ARTIFACT_NAME}"
+ENTRYPOINT java -jar "${ARTIFACT_NAME}"
