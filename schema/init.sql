@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS tasks
 (
     id          SERIAL PRIMARY KEY NOT NULL UNIQUE,
     owner_id    INT                NOT NULL,
-    description VARCHAR(65535)     NOT NULL,
+    description VARCHAR(2048)     NOT NULL,
     created_at  TIMESTAMPTZ        NOT NULL DEFAULT now(),
     updated_at  TIMESTAMPTZ        NOT NULL DEFAULT now(),
     CONSTRAINT fk_author FOREIGN KEY (owner_id) REFERENCES users (id)

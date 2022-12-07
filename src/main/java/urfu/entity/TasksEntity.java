@@ -29,7 +29,7 @@ public class TasksEntity
     private Integer ownerId;
 
     @Basic
-    @Column(name = "description", nullable = false, length = 65535)
+    @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
     @Basic
