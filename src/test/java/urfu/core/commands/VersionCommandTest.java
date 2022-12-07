@@ -15,8 +15,6 @@ public class VersionCommandTest {
     ICommand command = commands.get("version");
 
     if (command == null) Assertions.fail("Could not find help command");
-
-    // TODO: добавить тест метода Execute()
   }
 
   @Test
