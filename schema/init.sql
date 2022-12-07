@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS users
     created_at TIMESTAMPTZ        NOT NULL DEFAULT now()
 );
 
+INSERT INTO users (name) VALUES ('root');
+
 CREATE TABLE IF NOT EXISTS tasks
 (
     id          SERIAL PRIMARY KEY NOT NULL UNIQUE,
