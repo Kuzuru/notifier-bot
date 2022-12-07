@@ -17,6 +17,7 @@
 
         <mapping class="urfu.entity.UsersEntity"/>
         <mapping class="urfu.entity.TasksEntity"/>
+        <mapping class="urfu.entity.NotifiersEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
