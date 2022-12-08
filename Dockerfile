@@ -6,7 +6,6 @@ WORKDIR $APP_HOME
 
 COPY build.gradle settings.gradle gradlew $APP_HOME/
 COPY gradle $APP_HOME/gradle
-COPY .gradle $APP_HOME/.gradle
 COPY --chown=gradle:gradle . /home/gradle/src
 
 USER root
