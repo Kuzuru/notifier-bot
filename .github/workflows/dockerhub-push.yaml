@@ -1,3 +1,5 @@
+name: DockerHub Push
+
 on:
   push:
     branches: [ main ]
