@@ -16,6 +16,8 @@ services:
     restart: on-failure
     depends_on:
       - postgresdb
+    volumes:
+      - ./.env:/usr/app/.env
 
   postgresdb:
     image: postgres:15.1-alpine
