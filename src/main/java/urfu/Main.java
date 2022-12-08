@@ -24,6 +24,7 @@ public class Main {
         System.out.print("notifier@bot: ");
 
         String userInput = input.readLine();
+        if (userInput == null) continue;
 
         // Обработка лишних пробелов во входной строке
         userInput = userInput.trim().replaceAll(" +", " ");
