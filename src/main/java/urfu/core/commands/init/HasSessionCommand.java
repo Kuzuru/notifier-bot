@@ -9,7 +9,7 @@ public class HasSessionCommand extends DefaultCommand {
     public void startNewSession() {
         if (session == null || !session.isOpen()) {
             this.session = HibernateUtil.getSessionFactory().openSession();
-        }else{
+        } else {
             this.session.getSession();
         }
     }
