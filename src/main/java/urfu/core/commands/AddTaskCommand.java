@@ -34,10 +34,9 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
         session.close();
     }
 
-
     @Override
     public String getUsageFormat() {
-        return "addTask";
+        return "addTask [description]";
     }
 
     @Override
