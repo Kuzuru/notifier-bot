@@ -1,9 +1,6 @@
 package urfu.core.commands.init;
 
-import urfu.core.commands.ClearCommand;
-import urfu.core.commands.HelpCommand;
-import urfu.core.commands.QuitCommand;
-import urfu.core.commands.VersionCommand;
+import urfu.core.commands.*;
 
 import java.util.LinkedHashMap;
 
@@ -12,6 +9,7 @@ public class CommandInitializer {
     LinkedHashMap<String, ICommand> commands = new LinkedHashMap<>();
 
     commands.put("help", new HelpCommand(0));
+    commands.put("addTask", new AddTaskCommand(1));
     commands.put("version", new VersionCommand(0));
     commands.put("clear", new ClearCommand(0));
     commands.put("quit", new QuitCommand(0));
