@@ -8,7 +8,6 @@ public class DefaultCommand implements ICommand {
 
   public DefaultCommand(int minArgs) {
     this.minArgs = minArgs;
-    log.atDebug().log("Команда {} инициализирована с {} аргументами", this.getClass().getSimpleName(), this.minArgs);
   }
 
   public final int getMinArgs() {
