@@ -10,7 +10,7 @@ public class ConfigInitializer {
     try {
       Dotenv.configure().systemProperties().load();
     } catch (DotenvException e) {
-      log.atError().log("Failed to load .env file");
+      log.atError().log("Ошибка загрузки .env файла");
       log.atError().log("ERRMSG: " + e.getMessage());
     }
   }

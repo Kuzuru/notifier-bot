@@ -13,17 +13,17 @@ import java.util.HashMap;
 public class Main {
   @SuppressWarnings("InfiniteLoopStatement")
   public static void main(String[] args) {
-    log.atInfo().log("Bot starting up...");
+    log.atInfo().log("Бот запускается...");
 
-    log.atInfo().log("Loading environment variables...");
+    log.atInfo().log("Загружаются переменные окружения...");
     ConfigInitializer.load();
 
-    log.atInfo().log("Loading commands list...");
+    log.atInfo().log("Загружается список доступных команд...");
     HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
     BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
-    log.atInfo().log("Successfully started up!");
+    log.atInfo().log("Запуск успешен! Happy hacking :)");
     try {
       while (true) {
         System.out.print("notifier@bot: ");
@@ -40,7 +40,7 @@ public class Main {
         if (command != null) command.safeArgsExecute(userInputArgs);
       }
     } catch (Exception e) {
-      log.atError().log("Got exception while waiting user input");
+      log.atError().log("Произошла ошибка в ожидании ввода команды :(");
       log.atError().log("ERRMSG: " + e.getMessage());
     }
   }
