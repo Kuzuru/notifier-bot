@@ -1,8 +1,10 @@
 package urfu.core.commands;
 
+import lombok.extern.slf4j.Slf4j;
 import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
+@Slf4j
 public class QuitCommand extends DefaultCommand implements ICommand {
   public QuitCommand(int minArgs) {
     super(minArgs);
@@ -10,7 +12,7 @@ public class QuitCommand extends DefaultCommand implements ICommand {
 
   @Override
   public void execute(String[] args) {
-    System.out.println("[LOG] Shutting down...");
+    log.atInfo().log("Shutting down...");
     System.exit(0);
   }
 

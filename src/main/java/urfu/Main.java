@@ -1,5 +1,6 @@
 package urfu;
 
+import lombok.extern.slf4j.Slf4j;
 import urfu.core.commands.init.CommandInitializer;
 import urfu.core.commands.init.ICommand;
 import urfu.core.config.ConfigInitializer;
@@ -8,17 +9,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+@Slf4j
 public class Main {
   @SuppressWarnings("InfiniteLoopStatement")
   public static void main(String[] args) {
-    System.out.println("[LOG] Bot started...\n");
+    log.atInfo().log("Bot starting up...");
 
+    log.atInfo().log("Loading environment variables...");
     ConfigInitializer.load();
 
+    log.atInfo().log("Loading commands list...");
     HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
     BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
+    log.atInfo().log("Successfully started up!");
     try {
       while (true) {
         System.out.print("notifier@bot: ");
@@ -35,7 +40,8 @@ public class Main {
         if (command != null) command.safeArgsExecute(userInputArgs);
       }
     } catch (Exception e) {
-      System.out.println("[ERR] Got exception while waiting user input: " + e.getMessage());
+      log.atError().log("Got exception while waiting user input");
+      log.atError().log("ERRMSG: " + e.getMessage());
     }
   }
 }

@@ -1,9 +1,17 @@
 package urfu.core.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ConfigInitializer {
   public static void load() {
-    Dotenv.configure().systemProperties().load();
+    try {
+      Dotenv.configure().systemProperties().load();
+    } catch (DotenvException e) {
+      log.atError().log("Failed to load .env file");
+      log.atError().log("ERRMSG: " + e.getMessage());
+    }
   }
 }

@@ -1,10 +1,14 @@
 package urfu.core.commands.init;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class DefaultCommand implements ICommand {
   final int minArgs;
 
   public DefaultCommand(int minArgs) {
     this.minArgs = minArgs;
+    log.atDebug().log("Команда {} инициализирована с {} аргументами", this.getClass().getSimpleName(), this.minArgs);
   }
 
   public final int getMinArgs() {
