@@ -1,5 +1,6 @@
 package urfu.core.commands;
 
+import lombok.extern.slf4j.Slf4j;
 import urfu.core.commands.init.HasSessionCommand;
 import urfu.core.commands.init.ICommand;
 import urfu.entity.TasksEntity;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 
 import static urfu.core.Constants.ROOT_ID;
 
+@Slf4j
 public class AddTaskCommand extends HasSessionCommand implements ICommand {
   public AddTaskCommand(int minArgs) {
     super(minArgs);
@@ -30,6 +32,9 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
 
     session.save(task);
     session.getTransaction().commit();
+
+    log.atDebug().log("Создана задача #{} от ID:{}, с описанием: {}", task.getId(), task.getOwnerId(), task.getDescription());
+    log.atDebug().log("Статус транзакции: {}", session.getTransaction().getStatus());
 
     session.close();
   }
