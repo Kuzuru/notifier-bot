@@ -5,32 +5,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-public class DateTimeValidator implements DateValidator {
-  private final DateTimeFormatter timeFormatter =
-      DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+public class DateTimeValidator
+{
+    public boolean isDateValid(String dateStr)
+    {
+        DateTimeFormatter dateFormatter = DateTimeFormatter
+                .ofPattern("dd.MM.yyyy")
+                .withResolverStyle(ResolverStyle.STRICT);
 
-  private final DateTimeFormatter dateFormatter =
-      DateTimeFormatter.ofPattern("dd.MM.yyyy").withResolverStyle(ResolverStyle.STRICT);
+        try {
+            LocalDate.parse(dateStr, dateFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
 
-  @Override
-  public boolean isDateValid(String dateStr) {
-    try {
-      LocalDate.parse(dateStr, this.dateFormatter);
-    } catch (DateTimeParseException e) {
-      return false;
+        return true;
     }
 
-    return true;
-  }
 
-  @Override
-  public boolean isTimeValid(String dateStr) {
-    try {
-      LocalDate.parse(dateStr, this.timeFormatter);
-    } catch (DateTimeParseException e) {
-      return false;
+    public boolean isTimeValid(String dateStr)
+    {
+        DateTimeFormatter timeFormatter = DateTimeFormatter
+                .ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        try {
+            LocalDate.parse(dateStr, timeFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return true;
     }
-
-    return true;
-  }
 }
