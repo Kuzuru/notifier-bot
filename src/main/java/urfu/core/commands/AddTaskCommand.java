@@ -33,7 +33,11 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
     session.save(task);
     session.getTransaction().commit();
 
-    log.atDebug().log("Создана задача #{} от ID:{}, с описанием: {}", task.getId(), task.getOwnerId(), task.getDescription());
+    log.atDebug().log(
+        "Создана задача #{} от ID:{}, с описанием: {}",
+        task.getId(),
+        task.getOwnerId(),
+        task.getDescription());
     log.atDebug().log("Статус транзакции: {}", session.getTransaction().getStatus());
 
     session.close();
