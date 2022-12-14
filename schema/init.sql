@@ -19,8 +19,9 @@ CREATE TABLE IF NOT EXISTS tasks
 
 CREATE TABLE IF NOT EXISTS notifiers
 (
-    task_id    INT         NOT NULL,
-    notify_at  TIMESTAMPTZ NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    id         SERIAL PRIMARY KEY NOT NULL UNIQUE,
+    task_id    INT                NOT NULL,
+    notify_at  TIMESTAMPTZ        NOT NULL,
+    created_at TIMESTAMPTZ        NOT NULL DEFAULT now(),
     CONSTRAINT fk_task FOREIGN KEY (task_id) REFERENCES tasks (id)
 );

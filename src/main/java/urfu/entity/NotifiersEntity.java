@@ -17,8 +17,12 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotifiersEntity {
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
+  @Column(name = "id", nullable = false)
+  private Integer id;
+
+  @Basic
   @Column(name = "task_id", nullable = false)
   private Integer taskId;
 
