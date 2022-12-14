@@ -9,28 +9,28 @@ import java.util.HashMap;
 
 public class AddTaskCommandTest {
 
-    @Test
-    void isCorrectUsageFormat() {
-        HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+  @Test
+  void isCorrectUsageFormat() {
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-        ICommand command = commands.get("addTask");
+    ICommand command = commands.get("addTask");
 
-        if (command == null) Assertions.fail("Could not find help command");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        Assertions.assertEquals("addTask [description]", command.getUsageFormat());
-    }
+    Assertions.assertEquals("addTask [description]", command.getUsageFormat());
+  }
 
-    @Test
-    void isCorrectGetInfo() {
-        HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+  @Test
+  void isCorrectGetInfo() {
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
 
-        ICommand command = commands.get("addTask");
-        if (command == null) Assertions.fail("Could not find help command");
+    ICommand command = commands.get("addTask");
+    if (command == null) Assertions.fail("Could not find help command");
 
-        StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
 
-        sb.append("\n").append("Позволяет добавить задачу в бота").append("\n");
+    sb.append("\n").append("Позволяет добавить задачу в бота").append("\n");
 
-        Assertions.assertEquals(sb.toString(), command.getInfo());
-    }
+    Assertions.assertEquals(sb.toString(), command.getInfo());
+  }
 }
