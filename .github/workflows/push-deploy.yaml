@@ -1,0 +1,21 @@
+name: Deploy on Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Connect to Server
+    uses: webfactory/ssh-actions@v0.3.0
+
+    with:
+      host: ${{ secrets.SERVER_HOSTNAME }}
+      username: kuzuru
+      private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    env:
+      COMMAND: |
+        cd notifier
+        wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
+        sudo ./run-bot-linux.sh
