@@ -1,11 +1,12 @@
-name: Deploy on Server
+name: Deploy Application
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - master
 
 jobs:
-  deploy:
+  upload:
     name: Extract archive and create directories
     uses: appleboy/ssh-action@master
     env:
