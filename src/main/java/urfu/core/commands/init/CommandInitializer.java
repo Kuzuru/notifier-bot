@@ -10,6 +10,7 @@ public class CommandInitializer {
 
     commands.put("help", new HelpCommand(0));
     commands.put("addTask", new AddTaskCommand(1));
+    commands.put("editTask", new EditTaskCommand(2));
     commands.put("notify", new NotifyCommand(3));
     commands.put("version", new VersionCommand(0));
     commands.put("clear", new ClearCommand(0));
