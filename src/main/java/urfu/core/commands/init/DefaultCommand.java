@@ -14,7 +14,7 @@ public class DefaultCommand implements ICommand {
     return this.minArgs;
   }
 
-  public final void safeArgsExecute(String[] args) {
+  public final boolean safeArgsExecute(String[] args) {
     String commandName = args[0];
 
     if (args.length - 1 < this.minArgs) {
@@ -22,10 +22,12 @@ public class DefaultCommand implements ICommand {
           "Команде %s требуется минимум %d аргумент(-а)\n", commandName, getMinArgs());
       System.out.printf("Для получения справки используйте: help %s\n\n", commandName);
 
-      return;
+      return false;
     }
 
     this.execute(args);
+
+    return true;
   }
 
   public void execute(String[] args) {

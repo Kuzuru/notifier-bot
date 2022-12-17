@@ -1,0 +1,5 @@
+<configuration>
+    <root level="ERROR">
+        <!-- other logback elements -->
+    </root>
+</configuration>
