@@ -40,6 +40,8 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       return;
     }
 
+    // Перенести на пакет java.time
+    // + Более удобное и продвинутое API
     Calendar calendar = new GregorianCalendar(year, month - 1, day, hours, minutes);
 
     Calendar cSchedStartCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
@@ -60,11 +62,11 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
     // Добавление напоминания
     startNewSession();
     session.getTransaction().begin();
+
     try {
       NotifiersEntity notify = new NotifiersEntity();
 
       notify.setTaskId(taskID);
-
       notify.setNotifyAt(timestamp);
 
       session.save(notify);

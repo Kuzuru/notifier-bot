@@ -17,7 +17,7 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
 
   @Override
   public void execute(String[] args) {
-    String[] descriptionArgs = Arrays.copyOfRange(args, 1, args.length);
+    String[] descriptionArgs = Arrays.copyOfRange(args, 2, args.length);
     String taskDescription = String.join(" ", descriptionArgs);
 
     if (taskDescription.length() > 2048) taskDescription = taskDescription.substring(0, 2047);

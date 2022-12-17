@@ -8,7 +8,6 @@ import urfu.core.commands.init.ICommand;
 import java.util.HashMap;
 
 public class AddTaskCommandTest {
-
   @Test
   void isCorrectUsageFormat() {
     HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
