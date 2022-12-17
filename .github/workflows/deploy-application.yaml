@@ -7,16 +7,17 @@ on:
 
 jobs:
   upload:
-    name: Extract archive and create directories
-    uses: appleboy/ssh-action@master
-    env:
-      GITHUB_SHA: ${{ github.sha }}
+    name: Uploading
+    uses: appleboy/ssh-action@v0.1.6
     with:
       host: ${{ secrets.SERVER_HOSTNAME }}
       username: kuzuru
       key: ${{ secrets.SSH_PRIVATE_KEY }}
       port: 22
       script: |
+        whoami
+        ls -al
+        ls -laFh
         cd notifier
         wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
         sudo ./run-bot-linux.sh
