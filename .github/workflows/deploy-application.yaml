@@ -6,22 +6,22 @@ on:
       - master
 
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
+    
     steps:
       - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v0.1.6
+        uses: D3rHase/ssh-command-action@{version}
         with:
           host: ${{ secrets.SERVER_HOSTNAME }}
-          username: kuzuru
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            whoami
-            ls -al
-            ls -laFh
-            cd notifier
-            wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
-            sudo ./run-bot-linux.sh
+          user: kuzuru
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          command: |
+              whoami
+              ls -al
+              ls -laFh
+              cd notifier
+              wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
+              sudo ./run-bot-linux.sh
+            
