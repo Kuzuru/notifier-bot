@@ -6,16 +6,16 @@ on:
 
 jobs:
   deploy:
-    name: Connect to Server
-    uses: webfactory/ssh-actions@v0.3.0
-
+    name: Extract archive and create directories
+    uses: appleboy/ssh-action@master
+    env:
+      GITHUB_SHA: ${{ github.sha }}
     with:
       host: ${{ secrets.SERVER_HOSTNAME }}
       username: kuzuru
-      private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    env:
-      COMMAND: |
+      key: ${{ secrets.SSH_PRIVATE_KEY }}
+      port: 22
+      script: |
         cd notifier
         wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
         sudo ./run-bot-linux.sh
