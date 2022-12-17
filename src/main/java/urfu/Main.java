@@ -22,8 +22,7 @@ public class Main {
   private static final Logger logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
   @SuppressWarnings("InfiniteLoopStatement")
-  public static void main(String[] args) throws TelegramApiException
-  {
+  public static void main(String[] args) throws TelegramApiException {
     if (Objects.equals(System.getProperty("APP_DEBUG"), "false")) {
       ((ch.qos.logback.classic.Logger) logger).setLevel(Level.ERROR);
     }
@@ -64,8 +63,7 @@ public class Main {
 
         ICommand command = commands.get(userInputArgs[0]);
 
-        if (command != null)
-          command.safeArgsExecute(userInputArgs);
+        if (command != null) command.safeArgsExecute(userInputArgs);
       }
     } catch (Exception e) {
       log.atError().log("Произошла ошибка в ожидании ввода команды :(");
