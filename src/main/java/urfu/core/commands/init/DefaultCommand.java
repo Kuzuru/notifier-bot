@@ -2,19 +2,27 @@ package urfu.core.commands.init;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static urfu.core.Constants.ROOT_ID;
+
 @Slf4j
 public class DefaultCommand implements ICommand {
   final int minArgs;
+  final boolean isRootRequired;
 
-  public DefaultCommand(int minArgs) {
+  public DefaultCommand(int minArgs, boolean isRootRequired) {
     this.minArgs = minArgs;
+    this.isRootRequired = isRootRequired;
   }
 
   public final int getMinArgs() {
     return this.minArgs;
   }
 
-  public final boolean safeArgsExecute(String[] args) {
+  public final boolean safeArgsExecute(Integer pLevel, String[] args) {
+    if (isRootRequired && pLevel != ROOT_ID) {
+      return false;
+    }
+
     String commandName = args[0];
 
     if (args.length - 1 < this.minArgs) {
@@ -25,12 +33,12 @@ public class DefaultCommand implements ICommand {
       return false;
     }
 
-    this.execute(args);
+    this.execute(pLevel, args);
 
     return true;
   }
 
-  public void execute(String[] args) {
+  public void execute(Integer pLevel, String[] args) {
     System.out.printf("Вызван метод execute() класса %s\n", this.getClass().getSimpleName());
   }
 

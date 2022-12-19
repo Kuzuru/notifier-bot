@@ -4,12 +4,12 @@ import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
 public class ClearCommand extends DefaultCommand implements ICommand {
-  public ClearCommand(int minArgs) {
-    super(minArgs);
+  public ClearCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
+  public void execute(Integer pLevel, String[] args) {
     // 033    -> ESC
     // [H     -> Передвижение курсора
     // 033[2J -> В самое начало, затирая всё на пути

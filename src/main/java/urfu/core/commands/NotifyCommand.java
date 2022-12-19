@@ -11,12 +11,12 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 public class NotifyCommand extends HasSessionCommand implements ICommand {
-  public NotifyCommand(int minArgs) {
-    super(minArgs);
+  public NotifyCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
+  public void execute(Integer pLevel, String[] args) {
     String taskIdString = args[1];
     String[] date = args[2].split("\\.");
     String[] time = args[3].split(":");

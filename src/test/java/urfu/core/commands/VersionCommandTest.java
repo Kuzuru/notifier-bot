@@ -7,10 +7,12 @@ import urfu.core.commands.init.ICommand;
 
 import java.util.HashMap;
 
+import static urfu.core.Constants.ROOT_ID;
+
 public class VersionCommandTest {
   @Test
   void CheckVersion() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     ICommand command = commands.get("version");
 
@@ -19,7 +21,7 @@ public class VersionCommandTest {
 
   @Test
   void isCorrectUsageFormat() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     ICommand command = commands.get("version");
     if (command == null) Assertions.fail("Could not find help command");
@@ -29,7 +31,7 @@ public class VersionCommandTest {
 
   @Test
   void isCorrectGetInfo() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     ICommand command = commands.get("version");
     if (command == null) Assertions.fail("Could not find help command");

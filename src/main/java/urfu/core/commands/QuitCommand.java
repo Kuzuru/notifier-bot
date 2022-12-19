@@ -7,12 +7,12 @@ import urfu.core.utils.HibernateUtil;
 
 @Slf4j
 public class QuitCommand extends DefaultCommand implements ICommand {
-  public QuitCommand(int minArgs) {
-    super(minArgs);
+  public QuitCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
+  public void execute(Integer pLevel, String[] args) {
     log.atInfo().log("Выключение бота...");
     HibernateUtil.close();
     System.exit(0);

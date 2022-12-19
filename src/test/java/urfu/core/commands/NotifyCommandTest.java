@@ -7,10 +7,12 @@ import urfu.core.commands.init.ICommand;
 
 import java.util.HashMap;
 
+import static urfu.core.Constants.ROOT_ID;
+
 public class NotifyCommandTest {
   @Test
   void isCorrectUsageFormat() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     ICommand command = commands.get("notify");
 
@@ -22,7 +24,7 @@ public class NotifyCommandTest {
 
   @Test
   void isCorrectGetInfo() {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     ICommand command = commands.get("notify");
 

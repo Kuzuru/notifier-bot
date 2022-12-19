@@ -4,12 +4,12 @@ import urfu.core.commands.init.DefaultCommand;
 import urfu.core.commands.init.ICommand;
 
 public class VersionCommand extends DefaultCommand implements ICommand {
-  public VersionCommand(int minArgs) {
-    super(minArgs);
+  public VersionCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
+  public void execute(Integer pLevel, String[] args) {
     System.out.println(System.getProperty("VERSION") + "\n");
   }
 

@@ -16,22 +16,23 @@ import urfu.core.utils.StdoutLocker;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 public class Run extends TelegramLongPollingBot {
   private String handleShowHelpCallback(CallbackQuery callbackQuery) {
-    log.atDebug().log("callbackQuery: {}", callbackQuery.getMessage().getText());
-
     int startIndex = "Команде ".length();
     int endIndex = callbackQuery.getMessage().getText().indexOf(" ", startIndex);
     String parsedCommandName = callbackQuery.getMessage().getText().substring(startIndex, endIndex);
 
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    int tgUserID = Math.toIntExact(callbackQuery.getFrom().getId());
+
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(tgUserID);
     ICommand helpCommand = commands.get("help");
 
     return StdoutLocker.lockStdout(
         () -> {
-          helpCommand.safeArgsExecute(new String[] {"/help", parsedCommandName});
+          helpCommand.safeArgsExecute(tgUserID, new String[] {"/help", parsedCommandName});
         });
   }
 
@@ -106,12 +107,19 @@ public class Run extends TelegramLongPollingBot {
   }
 
   public void commandReply(Message message) {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    int tgUserID = Math.toIntExact(message.getFrom().getId());
+
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(tgUserID);
     SendMessage response = new SendMessage();
 
     String userInput = message.getText().replaceFirst("^/", "");
     userInput = userInput.trim().replaceAll(" +", " ");
     String[] userInputArgs = userInput.split(" ");
+
+    if (Objects.equals(userInputArgs[0], "start")) {
+      UserRegisterCommand URC = new UserRegisterCommand(0, false);
+      URC.execute(tgUserID, new String[] {});
+    }
 
     ICommand command = commands.get(userInputArgs[0]);
 
@@ -123,7 +131,7 @@ public class Run extends TelegramLongPollingBot {
             () -> {
               boolean isSucceed = false;
 
-              if (command != null) isSucceed = command.safeArgsExecute(userInputArgs);
+              if (command != null) isSucceed = command.safeArgsExecute(tgUserID, userInputArgs);
 
               if (!isSucceed) {
                 InlineKeyboardMarkup helpKeyboard = helpInlineBuilder(userInputArgs[0]);
