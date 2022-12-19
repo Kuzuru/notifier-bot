@@ -12,8 +12,10 @@ USER root
 RUN chown -R gradle /home/gradle/src
 
 COPY . .
-RUN gradle clean build --no-daemon --info --stacktrace --scan --refresh-dependencies -x test
-RUN gradle fatJar
+
+# --info --stacktrace --scan --refresh-dependencies
+RUN gradle clean build --no-daemon -x test
+RUN gradle fatJar --no-daemon
 
 
 # Actual container
