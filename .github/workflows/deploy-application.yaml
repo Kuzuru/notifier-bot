@@ -14,8 +14,8 @@ jobs:
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.SERVER_HOSTNAME }}
-        username: kuzuru
-        password: ${{ secrets.SSH_PRIVATE_KEY }}
+        username: kuzuru@ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
               whoami
