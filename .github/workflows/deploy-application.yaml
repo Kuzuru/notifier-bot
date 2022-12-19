@@ -11,12 +11,12 @@ jobs:
     
     steps:
     - name: Executing Remote SSH
-      uses: webfactory/ssh-agent@master
+      uses: appleboy/ssh-action@v0.1.4
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        
-    - name: Atomic Deploy
-      run: |
+        host: ${{ secrets.SERVER_HOSTNAME }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
           wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
           chmod +x+x+x run-bot-linux.sh
           sudo ./run-bot-linux.sh
