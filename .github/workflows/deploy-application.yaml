@@ -13,14 +13,13 @@ jobs:
     - name: Executing Remote SSH
       uses: webfactory/ssh-agent@master
       with:
-        host: ${{ secrets.SERVER_HOSTNAME }}
-        port: 22
-        username: ${{ secrets.USERNAME }}
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-              whoami
-              ls -al
-              ls -laFh
-              cd notifier
-              wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
-              sudo ./run-bot-linux.sh
+        
+    - name: Atomic Deploy
+      run: |
+          whoami
+          ls -al
+          ls -laFh
+          cd notifier
+          wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
+          sudo ./run-bot-linux.sh
