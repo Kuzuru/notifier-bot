@@ -18,4 +18,5 @@ jobs:
     - name: Atomic Deploy
       run: |
           wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
-          ./run-bot-linux.sh
+          chmod +x+x+x run-bot-linux.sh
+          sudo ./run-bot-linux.sh
