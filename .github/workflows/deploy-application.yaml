@@ -18,6 +18,7 @@ jobs:
     - name: Atomic Deploy
       run: |
           whoami
+          pwd
           ls -al
           ls -laFh
           cd notifier
