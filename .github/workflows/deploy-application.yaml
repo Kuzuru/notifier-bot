@@ -11,13 +11,12 @@ jobs:
     
     steps:
     - name: Executing Remote SSH
-      uses: appleboy/ssh-action@master
+      uses: webfactory/ssh-agent@master
       with:
         host: ${{ secrets.SERVER_HOSTNAME }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
         port: 22
+        username: ${{ secrets.USERNAME }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
               whoami
               ls -al
