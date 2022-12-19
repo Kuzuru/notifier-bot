@@ -1,4 +1,4 @@
-name: Deploy Application
+name: Remote SSH Build
 
 on:
   push:
@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: executing remote ssh commands using password
-        uses: D3rHase/ssh-command-action@latest
-        with:
-          host: ${{ secrets.SERVER_HOSTNAME }}
-          user: kuzuru
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          command: |
+    - name: Executing Remote SSH
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.SERVER_HOSTNAME }}
+        username: kuzuru
+        password: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
               whoami
               ls -al
               ls -laFh
               cd notifier
               wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
               sudo ./run-bot-linux.sh
-            
