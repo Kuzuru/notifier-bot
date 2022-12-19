@@ -17,56 +17,54 @@ import java.util.List;
 import java.util.TimeZone;
 
 @Slf4j
-public class ShowTasksCommand extends HasSessionCommand implements ICommand
-{
-    public ShowTasksCommand(int minArgs, boolean isRootRequired)
-    {
-        super(minArgs, isRootRequired);
+public class ShowTasksCommand extends HasSessionCommand implements ICommand {
+  public ShowTasksCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
+  }
+
+  @Override
+  public void execute(Integer pLevel, String[] args) {
+    startNewSession();
+
+    EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
+
+    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<TasksEntity> criteriaQuery = criteriaBuilder.createQuery(TasksEntity.class);
+
+    Root<TasksEntity> root = criteriaQuery.from(TasksEntity.class);
+    criteriaQuery.select(root);
+
+    Predicate condition = criteriaBuilder.equal(root.get("ownerId"), pLevel);
+    criteriaQuery.where(condition);
+
+    TypedQuery<TasksEntity> query = entityManager.createQuery(criteriaQuery);
+    List<TasksEntity> entities = query.getResultList();
+
+    entityManager.close();
+    session.close();
+
+    for (TasksEntity entity : entities) {
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy // HH:mm");
+      dateFormat.setTimeZone(TimeZone.getTimeZone(System.getProperty("TIMEZONE")));
+      String formattedTimestamp = dateFormat.format(entity.getUpdatedAt());
+
+      System.out.println("ID: " + entity.getId());
+      System.out.println("Описание: " + entity.getDescription());
+      System.out.println("Последний раз изменена: " + formattedTimestamp + "\n");
     }
+  }
 
-    @Override
-    public void execute(Integer pLevel, String[] args) {
-        startNewSession();
+  @Override
+  public String getUsageFormat() {
+    return "showTasks";
+  }
 
-        EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
+  @Override
+  public String getInfo() {
+    StringBuilder sb = new StringBuilder();
 
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<TasksEntity> criteriaQuery = criteriaBuilder.createQuery(TasksEntity.class);
+    sb.append("\n").append("Показывает текущие задачи").append("\n");
 
-        Root<TasksEntity> root = criteriaQuery.from(TasksEntity.class);
-        criteriaQuery.select(root);
-
-        Predicate condition = criteriaBuilder.equal(root.get("ownerId"), pLevel);
-        criteriaQuery.where(condition);
-
-        TypedQuery<TasksEntity> query = entityManager.createQuery(criteriaQuery);
-        List<TasksEntity> entities = query.getResultList();
-
-        entityManager.close();
-        session.close();
-
-        for (TasksEntity entity : entities) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy // HH:mm");
-            dateFormat.setTimeZone(TimeZone.getTimeZone(System.getProperty("TIMEZONE")));
-            String formattedTimestamp = dateFormat.format(entity.getUpdatedAt());
-
-            System.out.println("ID: " + entity.getId());
-            System.out.println("Описание: " + entity.getDescription());
-            System.out.println("Последний раз изменена: " + formattedTimestamp + "\n");
-        }
-    }
-
-    @Override
-    public String getUsageFormat() {
-        return "showTasks";
-    }
-
-    @Override
-    public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\n").append("Показывает текущие задачи").append("\n");
-
-        return sb.toString();
-    }
+    return sb.toString();
+  }
 }
