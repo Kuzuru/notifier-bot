@@ -19,6 +19,7 @@ public class CommandInitializer {
 
     commands.put("addTask", new AddTaskCommand(1, false));
     commands.put("notify", new NotifyCommand(3, false));
+    commands.put("showTasks", new ShowTasksCommand(0, false));
     commands.put("version", new VersionCommand(0, false));
 
     return commands;

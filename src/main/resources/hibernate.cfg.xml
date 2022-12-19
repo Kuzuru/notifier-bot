@@ -5,6 +5,8 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+
+        <property name="hibernate.jdbc.time_zone">${TIMEZONE}</property>
         
         <property name="connection.url">jdbc:postgresql://postgresdb:5432/project</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
@@ -18,8 +20,5 @@
         <mapping class="urfu.entity.UsersEntity"/>
         <mapping class="urfu.entity.TasksEntity"/>
         <mapping class="urfu.entity.NotifiersEntity"/>
-
-        <!-- DB schema will be updated if needed -->
-        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>
 </hibernate-configuration>
