@@ -17,12 +17,5 @@ jobs:
         
     - name: Atomic Deploy
       run: |
-          pwd
-          cd /
-          pwd
-          ls -laFh
-          cd home
-          ls -laFh
-          cd notifier
           wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
           sudo ./run-bot-linux.sh
