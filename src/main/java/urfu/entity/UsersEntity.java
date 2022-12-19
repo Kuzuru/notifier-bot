@@ -22,27 +22,27 @@ public class UsersEntity {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-    @Basic
-    @Column(name = "tg_id", nullable = false)
-    private Integer tgId;
+  @Basic
+  @Column(name = "tg_id", nullable = false)
+  private Integer tgId;
 
   @Basic
   @CreationTimestamp
   @Column(name = "created_at", nullable = false)
   private Timestamp createdAt;
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UsersEntity that = (UsersEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(tgId, that.tgId) && Objects.equals(createdAt, that.createdAt);
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    UsersEntity that = (UsersEntity) o;
+    return Objects.equals(id, that.id)
+        && Objects.equals(tgId, that.tgId)
+        && Objects.equals(createdAt, that.createdAt);
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, tgId, createdAt);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, tgId, createdAt);
+  }
 }
