@@ -7,17 +7,15 @@ import urfu.entity.TasksEntity;
 
 import java.util.Arrays;
 
-import static urfu.core.Constants.ROOT_ID;
-
 @Slf4j
 public class AddTaskCommand extends HasSessionCommand implements ICommand {
-  public AddTaskCommand(int minArgs) {
-    super(minArgs);
+  public AddTaskCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
-    String[] descriptionArgs = Arrays.copyOfRange(args, 2, args.length);
+  public void execute(Integer pLevel, String[] args) {
+    String[] descriptionArgs = Arrays.copyOfRange(args, 1, args.length);
     String taskDescription = String.join(" ", descriptionArgs);
 
     if (taskDescription.length() > 2048) taskDescription = taskDescription.substring(0, 2047);
@@ -27,7 +25,7 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
 
     TasksEntity task = new TasksEntity();
 
-    task.setOwnerId(ROOT_ID);
+    task.setOwnerId(pLevel);
     task.setDescription(taskDescription);
 
     session.save(task);

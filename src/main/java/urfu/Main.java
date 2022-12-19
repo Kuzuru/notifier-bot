@@ -17,6 +17,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static urfu.core.Constants.ROOT_ID;
+
 @Slf4j
 public class Main {
   private static final Logger logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
@@ -33,7 +35,7 @@ public class Main {
     ConfigInitializer.load();
 
     log.atInfo().log("Загружается список доступных команд...");
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     /////////////////
     TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
@@ -63,7 +65,7 @@ public class Main {
 
         ICommand command = commands.get(userInputArgs[0]);
 
-        if (command != null) command.safeArgsExecute(userInputArgs);
+        if (command != null) command.safeArgsExecute(ROOT_ID, userInputArgs);
       }
     } catch (Exception e) {
       log.atError().log("Произошла ошибка в ожидании ввода команды :(");

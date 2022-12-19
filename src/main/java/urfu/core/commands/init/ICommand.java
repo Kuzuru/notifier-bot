@@ -3,9 +3,9 @@ package urfu.core.commands.init;
 public interface ICommand {
   int getMinArgs();
 
-  boolean safeArgsExecute(String[] args);
+  boolean safeArgsExecute(Integer pLevel, String[] args);
 
-  void execute(String[] args);
+  void execute(Integer pLevel, String[] args);
 
   String getUsageFormat();
 

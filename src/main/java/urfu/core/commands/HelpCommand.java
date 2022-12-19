@@ -6,14 +6,16 @@ import urfu.core.commands.init.ICommand;
 
 import java.util.HashMap;
 
+import static urfu.core.Constants.ROOT_ID;
+
 public class HelpCommand extends DefaultCommand implements ICommand {
-  public HelpCommand(int minArgs) {
-    super(minArgs);
+  public HelpCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(String[] args) {
-    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands();
+  public void execute(Integer pLevel, String[] args) {
+    HashMap<String, ICommand> commands = CommandInitializer.getAvailableCommands(ROOT_ID);
 
     if (args.length != 2 || !commands.containsKey(args[1])) {
       for (ICommand command : commands.values()) {

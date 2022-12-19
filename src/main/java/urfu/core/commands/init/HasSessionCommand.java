@@ -8,8 +8,8 @@ import urfu.core.utils.HibernateUtil;
 public class HasSessionCommand extends DefaultCommand {
   public Session session;
 
-  public HasSessionCommand(int minArgs) {
-    super(minArgs);
+  public HasSessionCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
     startNewSession();
   }
 
