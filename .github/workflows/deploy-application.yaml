@@ -14,10 +14,12 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           host: ${{ secrets.SERVER_HOSTNAME }}
-          username: kuzuru
+          username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           command: |
-            pwd
             cd ./notifier
-            ls -laFh
+            wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
+            chmod +x run-bot-linux.sh
+            sudo docker-compose down
+            sudo ./run-bot-linux.sh
