@@ -48,7 +48,9 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           command: |
             cd /home/kuzuru/notifier
-            if [[ -f "run-bot-linux.sh" ]]; then rm -rf run-bot-linux.sh fi
+            if [[ -f "run-bot-linux.sh" ]]; then
+            rm -rf run-bot-linux.sh
+            fi
             wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
             chmod +x run-bot-linux.sh
             sudo docker-compose down
