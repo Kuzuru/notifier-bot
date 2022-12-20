@@ -43,14 +43,12 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           host: ${{ secrets.SERVER_HOSTNAME }}
-          username: root
+          username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          password: ${{ secrets.USERPASS }}
-          tryKeyboard: true
           command: |
             cd ./notifier
-            if [[ -f "run-bot-linux.sh" ]] then rm -rf run-bot-linux.sh fi
+            if [[ -f "run-bot-linux.sh" ]]; then rm -rf run-bot-linux.sh fi
             wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
             chmod +x run-bot-linux.sh
             sudo docker-compose down
