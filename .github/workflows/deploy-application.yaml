@@ -46,6 +46,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          password: ${{ secrets.USERPASS }}
           command: |
             cd ./notifier
             wget https://github.com/Kuzuru/notifier-bot/releases/download/runner/run-bot-linux.sh
