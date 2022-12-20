@@ -80,7 +80,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
   @Override
   public String getUsageFormat() {
-    return "notify [ID_Task] [day.mounth.year] [hours:minutes]";
+    return "notify [TaskID] [DD.MM.YYYY] [HH:MM]";
   }
 
   @Override
