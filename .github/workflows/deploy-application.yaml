@@ -34,11 +34,12 @@ jobs:
             kuzuru/notifier-bot-app:latest
 
   build:
-    name: Build
+    name: Start Bot on Server
+    needs: docker
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checking PWD
+      - name: Restarting Docker
         uses: garygrossgarten/github-action-ssh@release
         with:
           host: ${{ secrets.SERVER_HOSTNAME }}
