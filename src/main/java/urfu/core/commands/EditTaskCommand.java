@@ -6,59 +6,53 @@ import urfu.entity.TasksEntity;
 
 import java.util.Arrays;
 
-public class EditTaskCommand extends HasSessionCommand implements ICommand
-{
-    public EditTaskCommand(int minArgs, boolean isRootRequired)
-    {
-        super(minArgs, isRootRequired);
+public class EditTaskCommand extends HasSessionCommand implements ICommand {
+  public EditTaskCommand(int minArgs, boolean isRootRequired) {
+    super(minArgs, isRootRequired);
+  }
+
+  @Override
+  public void execute(Integer pLevel, String[] args) {
+    String[] descriptionArgs = Arrays.copyOfRange(args, 2, args.length);
+    String taskDescription = String.join(" ", descriptionArgs);
+
+    int taskID = Integer.parseInt(args[1]);
+
+    if (taskDescription.length() == 0) {
+      System.out.println("Введите новое описание");
+      return;
     }
 
-    @Override
-    public void execute(Integer pLevel, String[] args)
-    {
-        String[] descriptionArgs = Arrays.copyOfRange(args, 2, args.length);
-        String taskDescription = String.join(" ", descriptionArgs);
+    if (taskDescription.length() > 2048) taskDescription = taskDescription.substring(0, 2047);
 
-        int taskID = Integer.parseInt(args[1]);
+    startNewSession();
+    session.getTransaction().begin();
 
-        if (taskDescription.length() == 0) {
-            System.out.println("Введите новое описание");
-            return;
-        }
+    try {
+      TasksEntity task = session.get(TasksEntity.class, taskID);
 
-        if (taskDescription.length() > 2048)
-            taskDescription = taskDescription.substring(0, 2047);
+      task.setDescription(taskDescription);
 
-        startNewSession();
-        session.getTransaction().begin();
+      session.save(task);
+      session.getTransaction().commit();
 
-        try {
-            TasksEntity task = session.get(TasksEntity.class, taskID);
-
-            task.setDescription(taskDescription);
-
-            session.save(task);
-            session.getTransaction().commit();
-
-            session.close();
-        } catch (Exception e) {
-            System.err.println("Такой задачи не существует \r\nERRMSG: %s" + e.getMessage() + "\n");
-        }
+      session.close();
+    } catch (Exception e) {
+      System.err.println("Такой задачи не существует \r\nERRMSG: %s" + e.getMessage() + "\n");
     }
+  }
 
-    @Override
-    public String getUsageFormat()
-    {
-        return "editTask [TaskID] [Description]";
-    }
+  @Override
+  public String getUsageFormat() {
+    return "editTask [TaskID] [Description]";
+  }
 
-    @Override
-    public String getInfo()
-    {
-        StringBuilder sb = new StringBuilder();
+  @Override
+  public String getInfo() {
+    StringBuilder sb = new StringBuilder();
 
-        sb.append("\n").append("Позволяет редактировать уже добавленную задачу").append("\n");
+    sb.append("\n").append("Позволяет редактировать уже добавленную задачу").append("\n");
 
-        return sb.toString();
-    }
+    return sb.toString();
+  }
 }
