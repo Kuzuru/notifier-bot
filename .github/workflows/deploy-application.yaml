@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: ls -a via ssh
+      - name: Checking PWD
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: pwd && ls -laFh
           host: ${{ secrets.SERVER_HOSTNAME }}
           username: kuzuru
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          command: |
+            pwd
+            cd ./notifier
+            ls -laFh
