@@ -5,6 +5,7 @@ import urfu.core.commands.init.ICommand;
 import urfu.entity.TasksEntity;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class EditTaskCommand extends HasSessionCommand implements ICommand {
   public EditTaskCommand(int minArgs, boolean isRootRequired) {
@@ -31,15 +32,19 @@ public class EditTaskCommand extends HasSessionCommand implements ICommand {
     try {
       TasksEntity task = session.get(TasksEntity.class, taskID);
 
-      task.setDescription(taskDescription);
+      if (Objects.equals(task.getOwnerId(), pLevel)) {
+        task.setDescription(taskDescription);
+      } else {
+        System.out.println("Данная задача не пренадлежит вам");
+      }
 
       session.save(task);
       session.getTransaction().commit();
-
-      session.close();
     } catch (Exception e) {
       System.err.println("Такой задачи не существует \r\nERRMSG: %s" + e.getMessage() + "\n");
     }
+
+    session.close();
   }
 
   @Override
