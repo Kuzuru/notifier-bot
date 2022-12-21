@@ -43,7 +43,8 @@ public class DeleteTaskCommand extends HasSessionCommand implements ICommand {
         EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<NotifiersEntity> criteriaQuery = criteriaBuilder.createQuery(NotifiersEntity.class);
+        CriteriaQuery<NotifiersEntity> criteriaQuery =
+            criteriaBuilder.createQuery(NotifiersEntity.class);
 
         Root<NotifiersEntity> root = criteriaQuery.from(NotifiersEntity.class);
         criteriaQuery.select(root);
