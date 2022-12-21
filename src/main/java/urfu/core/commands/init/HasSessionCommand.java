@@ -16,10 +16,10 @@ public class HasSessionCommand extends DefaultCommand {
   public void startNewSession() {
     log.atDebug().log("Команда {} запросила запуск новой сессии", this.getClass().getSimpleName());
 
-    if (session == null || !session.isOpen()) {
-      this.session = HibernateUtil.getSessionFactory().openSession();
-    } else {
-      this.session.getSession();
+    if (session != null && session.isOpen()) {
+      this.session.close();
     }
+
+    this.session = HibernateUtil.getSessionFactory().openSession();
   }
 }

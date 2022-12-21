@@ -43,6 +43,10 @@ public class ShowTasksCommand extends HasSessionCommand implements ICommand {
     entityManager.close();
     session.close();
 
+    if (entities.isEmpty()) {
+      System.out.println("У вас ещё нет задач :(");
+    }
+
     for (TasksEntity entity : entities) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy // HH:mm");
       dateFormat.setTimeZone(TimeZone.getTimeZone(System.getProperty("TIMEZONE")));
