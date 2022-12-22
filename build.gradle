@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    // Qwartz
+    implementation "org.quartz-scheduler:quartz:2.3.2"
+
     // Telegram
     implementation "org.telegram:telegrambots:6.3.0"
     implementation "commons-codec:commons-codec:1.15"

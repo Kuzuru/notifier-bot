@@ -9,11 +9,11 @@ import java.util.Objects;
 
 public class EditTaskCommand extends HasSessionCommand implements ICommand {
   public EditTaskCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override
-  public void execute(Integer pLevel, String[] args) {
+  public void execute(Integer pLevel, String[] args, String chatID) {
     String[] descriptionArgs = Arrays.copyOfRange(args, 2, args.length);
     String taskDescription = String.join(" ", descriptionArgs);
 

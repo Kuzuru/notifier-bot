@@ -27,6 +27,10 @@ public class UsersEntity {
   private Integer tgId;
 
   @Basic
+  @Column(name = "chat_id", nullable = false)
+  private Integer chatId;
+
+  @Basic
   @CreationTimestamp
   @Column(name = "created_at", nullable = false)
   private Timestamp createdAt;
@@ -38,6 +42,7 @@ public class UsersEntity {
     UsersEntity that = (UsersEntity) o;
     return Objects.equals(id, that.id)
         && Objects.equals(tgId, that.tgId)
+        && Objects.equals(chatId, that.chatId)
         && Objects.equals(createdAt, that.createdAt);
   }
 

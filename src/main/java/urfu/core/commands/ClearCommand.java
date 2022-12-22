@@ -5,7 +5,7 @@ import urfu.core.commands.init.ICommand;
 
 public class ClearCommand extends DefaultCommand implements ICommand {
   public ClearCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override

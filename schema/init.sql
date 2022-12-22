@@ -2,10 +2,11 @@ CREATE TABLE IF NOT EXISTS users
 (
     id         SERIAL PRIMARY KEY NOT NULL UNIQUE,
     tg_id      INT                NOT NULL UNIQUE,
+    chat_id    INT                NOT NULL UNIQUE,
     created_at TIMESTAMPTZ        NOT NULL DEFAULT now()
 );
 
-INSERT INTO users (tg_id) VALUES (1);
+INSERT INTO users (tg_id, chat_id) VALUES (1, 1);
 
 CREATE TABLE IF NOT EXISTS tasks
 (
