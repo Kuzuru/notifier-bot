@@ -5,14 +5,12 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import urfu.bots.telegram.Run;
 import urfu.core.commands.init.HasSessionCommand;
 import urfu.entity.NotifiersEntity;
 import urfu.entity.TasksEntity;
-import urfu.entity.UsersEntity;
 
-import static urfu.bots.telegram.Run.sendNotification;
 import static urfu.core.Constants.ROOT_ID;
-
 
 public class NotifierTask implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -37,11 +35,8 @@ public class NotifierTask implements Job {
         hsc.startNewSession();
 
         String description;        //Тут будет лежать описание
-        int userID;
         TasksEntity task = hsc.session.get(TasksEntity.class, taskID);
-
         description = task.getDescription();
-        userID = task.getOwnerId();
 
         // Удаление напоминания
         hsc.session.getTransaction().begin();
@@ -62,7 +57,8 @@ public class NotifierTask implements Job {
             response.setText(output);
             response.setChatId(chatID);
 
-            sendNotification(response);
+            Run r = new Run();
+            r.sendMessage(response);
         }
 
         hsc.session.close();

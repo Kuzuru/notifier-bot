@@ -80,6 +80,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
     session.getTransaction().begin();
 
     int notifierID = 0;
+    String chatID = "";
 
     try {
       NotifiersEntity notify = new NotifiersEntity();
@@ -98,7 +99,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       Root<UsersEntity> root = criteriaQuery.from(UsersEntity.class);
       criteriaQuery.select(root);
 
-      Predicate condition = criteriaBuilder.equal(root.get("id"), task.getOwnerId());
+      Predicate condition = criteriaBuilder.equal(root.get("tgId"), task.getOwnerId());
       criteriaQuery.where(condition);
 
       TypedQuery<UsersEntity> query = entityManager.createQuery(criteriaQuery);
@@ -106,7 +107,8 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       UsersEntity user = query.getSingleResult();
 
       System.out.println("USER:\n" + "a: " + user.getTgId() + "\nb: " + user.getChatId() + "\n");
-//      chatID = String.valueOf(user.getChatId());
+      chatID = String.valueOf(user.getChatId());
+      System.out.println("CHAT ID: " + chatID);
 
       session.save(notify);
       session.getTransaction().commit();
@@ -136,7 +138,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       JobDataMap dataMap = new JobDataMap();
       dataMap.put("taskIDKey", String.valueOf(taskID));
       dataMap.put("notifierID", String.valueOf(notifierID));
-//      dataMap.put("chatID", chatID);
+      dataMap.put("chatID", chatID);
 
       //что сделать (описано в файле notifierTask)
       JobDetail job = JobBuilder.newJob(NotifierTask.class)
@@ -146,8 +148,10 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
       SchedulerFactory schedulerFactory = new StdSchedulerFactory();
       Scheduler scheduler = schedulerFactory.getScheduler();
+
       // Постоянная проверка времени
       scheduler.start();
+
       // Выполнение задания
       scheduler.scheduleJob(job, triggerBuilder.build());
 

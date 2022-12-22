@@ -10,24 +10,26 @@ public class UserRegisterCommand extends HasSessionCommand implements ICommand {
   }
 
 
-  private void createUser(Integer pLevel, UsersEntity user) throws java.lang.NullPointerException {
+  private void createUser(Integer pLevel, UsersEntity user, String chatID) throws java.lang.NullPointerException {
     user.setTgId(pLevel);
-//    user.setChatId(Integer.valueOf(chatID));
+    user.setChatId(Integer.valueOf(chatID));
     session.save(user);
     session.getTransaction().commit();
   }
 
   @Override
   public void execute(Integer pLevel, String[] args) {
+    String chatIdString = args[0];
+
     startNewSession();
     session.getTransaction().begin();
 
     try {
       UsersEntity user = session.get(UsersEntity.class, pLevel);
-      createUser(pLevel, user);
+      createUser(pLevel, user, chatIdString);
     } catch (Exception e) {
       UsersEntity user = new UsersEntity();
-      createUser(pLevel, user);
+      createUser(pLevel, user, chatIdString);
     }
 
     session.close();

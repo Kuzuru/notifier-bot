@@ -36,8 +36,12 @@ public class Run extends TelegramLongPollingBot {
         });
   }
 
-  public static void sendNotification(SendMessage xyu) {
-    System.out.println(xyu);
+  public void sendMessage(SendMessage sendMessage) {
+    try {
+      execute(sendMessage);
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
+    }
   }
 
   public void onUpdateReceived(Update update) {
@@ -122,7 +126,7 @@ public class Run extends TelegramLongPollingBot {
 
     if (Objects.equals(userInputArgs[0], "start")) {
       UserRegisterCommand URC = new UserRegisterCommand(0, false);
-      URC.execute(tgUserID, new String[] {}, String.valueOf(message.getChatId()));
+      URC.execute(tgUserID, new String[] { String.valueOf(message.getChatId()) });
     }
 
     ICommand command = commands.get(userInputArgs[0]);
