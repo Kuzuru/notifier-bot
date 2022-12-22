@@ -47,10 +47,10 @@ public class TasksEntity {
     if (o == null || getClass() != o.getClass()) return false;
     TasksEntity that = (TasksEntity) o;
     return Objects.equals(id, that.id)
-            && Objects.equals(ownerId, that.ownerId)
-            && Objects.equals(description, that.description)
-            && Objects.equals(createdAt, that.createdAt)
-            && Objects.equals(updatedAt, that.updatedAt);
+        && Objects.equals(ownerId, that.ownerId)
+        && Objects.equals(description, that.description)
+        && Objects.equals(createdAt, that.createdAt)
+        && Objects.equals(updatedAt, that.updatedAt);
   }
 
   @Override

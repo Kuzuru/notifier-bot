@@ -9,8 +9,8 @@ public class UserRegisterCommand extends HasSessionCommand implements ICommand {
     super(minArgs, isRootRequired, chatID);
   }
 
-
-  private void createUser(Integer pLevel, UsersEntity user, String chatID) throws java.lang.NullPointerException {
+  private void createUser(Integer pLevel, UsersEntity user, String chatID)
+      throws java.lang.NullPointerException {
     user.setTgId(pLevel);
     user.setChatId(Integer.valueOf(chatID));
     session.save(user);

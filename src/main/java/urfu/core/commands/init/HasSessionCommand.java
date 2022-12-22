@@ -6,14 +6,13 @@ import urfu.core.utils.HibernateUtil;
 
 @Slf4j
 public class HasSessionCommand extends DefaultCommand {
-  //public abstract class HasSessionCommand extends DefaultCommand {
+  // public abstract class HasSessionCommand extends DefaultCommand {
   public Session session;
 
   public HasSessionCommand(int minArgs, boolean isRootRequired) {
     super(minArgs, isRootRequired);
     startNewSession();
   }
-
 
   public void startNewSession() {
     log.atDebug().log("Команда {} запросила запуск новой сессии", this.getClass().getSimpleName());
@@ -25,5 +24,5 @@ public class HasSessionCommand extends DefaultCommand {
     this.session = HibernateUtil.getSessionFactory().openSession();
   }
 
-  //public abstract void execute(Integer pLevel, String[] args, String chatID);
+  // public abstract void execute(Integer pLevel, String[] args, String chatID);
 }

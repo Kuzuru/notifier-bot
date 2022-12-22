@@ -72,7 +72,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
     Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
 
-    //получение даты для кварц
+    // получение даты для кварц
     Date dateForNotifier = calendar.getTime();
 
     // Добавление напоминания
@@ -92,8 +92,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
 
       CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-      CriteriaQuery<UsersEntity> criteriaQuery =
-              criteriaBuilder.createQuery(UsersEntity.class);
+      CriteriaQuery<UsersEntity> criteriaQuery = criteriaBuilder.createQuery(UsersEntity.class);
 
       Root<UsersEntity> root = criteriaQuery.from(UsersEntity.class);
       criteriaQuery.select(root);
@@ -111,7 +110,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       session.save(notify);
       session.getTransaction().commit();
 
-      notifierID = notify.getId();    //получили ID напоминания
+      notifierID = notify.getId(); // получили ID напоминания
 
       session.close();
     } catch (Exception e) {
@@ -120,17 +119,14 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
     // Навешивание Qwartz
     try {
-      //новый триггер
+      // новый триггер
       TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 
-      triggerBuilder.withIdentity(taskIdString, "tasks")
-              .startAt(dateForNotifier)
-              .withSchedule(
-                      SimpleScheduleBuilder
-                      .simpleSchedule()
-                      .withIntervalInMinutes(1)
-                      .withRepeatCount(0)
-              );
+      triggerBuilder
+          .withIdentity(taskIdString, "tasks")
+          .startAt(dateForNotifier)
+          .withSchedule(
+              SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(1).withRepeatCount(0));
 
       // Создание мапы для передачи taskID
       JobDataMap dataMap = new JobDataMap();
@@ -138,8 +134,9 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       dataMap.put("notifierID", String.valueOf(notifierID));
       dataMap.put("chatID", chatID);
 
-      //что сделать (описано в файле notifierTask)
-      JobDetail job = JobBuilder.newJob(NotifierTask.class)
+      // что сделать (описано в файле notifierTask)
+      JobDetail job =
+          JobBuilder.newJob(NotifierTask.class)
               .withIdentity(taskIdString, "tasks")
               .usingJobData(dataMap)
               .build();
@@ -151,10 +148,9 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       // Выполнение задания
       scheduler.scheduleJob(job, triggerBuilder.build());
 
-    } catch (SchedulerException e){
+    } catch (SchedulerException e) {
       System.out.println("ERROR: Нельзя навесить более одного напоминания" + e.getMessage());
     }
-
   }
 
   @Override
