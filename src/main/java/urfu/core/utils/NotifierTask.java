@@ -33,7 +33,7 @@ public class NotifierTask implements Job {
             return;
         }
 
-        HasSessionCommand hsc = new HasSessionCommand(0, false, chatID);
+        HasSessionCommand hsc = new HasSessionCommand(0, false);
         hsc.startNewSession();
 
         String description;        //Тут будет лежать описание

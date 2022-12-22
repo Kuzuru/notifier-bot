@@ -25,11 +25,11 @@ import java.util.TimeZone;
 
 public class NotifyCommand extends HasSessionCommand implements ICommand {
   public NotifyCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired, "0");
+    super(minArgs, isRootRequired);
   }
 
   @Override
-  public void execute(Integer pLevel, String[] args, String chatID) {
+  public void execute(Integer pLevel, String[] args) {
     String taskIdString = args[1];
     String[] date = args[2].split("\\.");
     String[] time = args[3].split(":");
@@ -106,7 +106,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       UsersEntity user = query.getSingleResult();
 
       System.out.println("USER:\n" + "a: " + user.getTgId() + "\nb: " + user.getChatId() + "\n");
-      chatID = String.valueOf(user.getChatId());
+//      chatID = String.valueOf(user.getChatId());
 
       session.save(notify);
       session.getTransaction().commit();
@@ -136,7 +136,7 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       JobDataMap dataMap = new JobDataMap();
       dataMap.put("taskIDKey", String.valueOf(taskID));
       dataMap.put("notifierID", String.valueOf(notifierID));
-      dataMap.put("chatID", chatID);
+//      dataMap.put("chatID", chatID);
 
       //что сделать (описано в файле notifierTask)
       JobDetail job = JobBuilder.newJob(NotifierTask.class)

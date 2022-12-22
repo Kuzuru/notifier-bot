@@ -8,7 +8,7 @@ import urfu.core.utils.HibernateUtil;
 @Slf4j
 public class QuitCommand extends DefaultCommand implements ICommand {
   public QuitCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired, "0");
+    super(minArgs, isRootRequired);
   }
 
   @Override

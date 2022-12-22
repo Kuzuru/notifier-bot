@@ -121,7 +121,7 @@ public class Run extends TelegramLongPollingBot {
     String[] userInputArgs = userInput.split(" ");
 
     if (Objects.equals(userInputArgs[0], "start")) {
-      UserRegisterCommand URC = new UserRegisterCommand(0, false, String.valueOf(message.getChatId()));
+      UserRegisterCommand URC = new UserRegisterCommand(0, false);
       URC.execute(tgUserID, new String[] {}, String.valueOf(message.getChatId()));
     }
 
