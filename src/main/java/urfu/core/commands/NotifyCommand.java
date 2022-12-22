@@ -106,9 +106,8 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
       UsersEntity user = query.getSingleResult();
 
-      System.out.println("USER:\n" + "a: " + user.getTgId() + "\nb: " + user.getChatId() + "\n");
+      System.out.println("Напоминание создано!");
       chatID = String.valueOf(user.getChatId());
-      System.out.println("CHAT ID: " + chatID);
 
       session.save(notify);
       session.getTransaction().commit();
