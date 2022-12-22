@@ -14,7 +14,7 @@ public class AddTaskCommand extends HasSessionCommand implements ICommand {
   }
 
   @Override
-  public void execute(Integer pLevel, String[] args) {
+  public void execute(Integer pLevel, String[] args, String chatID) {
     String[] descriptionArgs = Arrays.copyOfRange(args, 1, args.length);
     String taskDescription = String.join(" ", descriptionArgs);
 

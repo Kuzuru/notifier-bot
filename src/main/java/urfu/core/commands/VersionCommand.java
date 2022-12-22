@@ -5,7 +5,7 @@ import urfu.core.commands.init.ICommand;
 
 public class VersionCommand extends DefaultCommand implements ICommand {
   public VersionCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override

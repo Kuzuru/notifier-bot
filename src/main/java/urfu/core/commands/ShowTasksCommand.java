@@ -19,11 +19,11 @@ import java.util.TimeZone;
 @Slf4j
 public class ShowTasksCommand extends HasSessionCommand implements ICommand {
   public ShowTasksCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override
-  public void execute(Integer pLevel, String[] args) {
+  public void execute(Integer pLevel, String[] args, String chatID) {
     startNewSession();
 
     EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();

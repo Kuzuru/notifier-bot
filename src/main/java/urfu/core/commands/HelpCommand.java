@@ -10,7 +10,7 @@ import static urfu.core.Constants.ROOT_ID;
 
 public class HelpCommand extends DefaultCommand implements ICommand {
   public HelpCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override

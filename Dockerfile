@@ -27,4 +27,5 @@ WORKDIR $APP_HOME
 COPY --from=BUILD_IMAGE $APP_HOME .
 COPY --from=BUILD_IMAGE $APP_HOME/.gradle .gradle
 
-CMD java -jar "build/libs/${ARTIFACT_NAME}"
+#CMD java -jar "build/libs/${ARTIFACT_NAME}"
+CMD /bin/sh

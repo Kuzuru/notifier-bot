@@ -1,6 +1,7 @@
 package urfu.core.commands.init;
 
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.SchedulerException;
 
 import static urfu.core.Constants.ROOT_ID;
 

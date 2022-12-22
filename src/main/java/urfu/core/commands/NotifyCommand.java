@@ -1,22 +1,35 @@
 package urfu.core.commands;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import urfu.core.commands.init.HasSessionCommand;
 import urfu.core.commands.init.ICommand;
 import urfu.core.utils.DateTimeValidator;
+import urfu.core.utils.HibernateUtil;
+import urfu.core.utils.NotifierTask;
 import urfu.entity.NotifiersEntity;
+import urfu.entity.TasksEntity;
+import urfu.entity.UsersEntity;
 
 import java.util.Calendar;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 public class NotifyCommand extends HasSessionCommand implements ICommand {
   public NotifyCommand(int minArgs, boolean isRootRequired) {
-    super(minArgs, isRootRequired);
+    super(minArgs, isRootRequired, "0");
   }
 
   @Override
-  public void execute(Integer pLevel, String[] args) {
+  public void execute(Integer pLevel, String[] args, String chatID) {
     String taskIdString = args[1];
     String[] date = args[2].split("\\.");
     String[] time = args[3].split(":");
@@ -44,12 +57,12 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
     // + Более удобное и продвинутое API
     Calendar calendar = new GregorianCalendar(year, month - 1, day, hours, minutes);
 
-    Calendar cSchedStartCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-    long gmtTime = cSchedStartCal.getTime().getTime();
+    String tz = System.getProperty("TIMEZONE");
+    Calendar cSchedStartCal = Calendar.getInstance(TimeZone.getTimeZone(tz));
+    long gmtTime = cSchedStartCal.getTime().getTime(); // Зачем ты получаешь unix метку?
 
-    long timezoneAlteredTime = gmtTime + TimeZone.getTimeZone("Asia/Yekaterinburg").getRawOffset();
-    Calendar calendarNow = Calendar.getInstance(TimeZone.getTimeZone("Asia/Yekaterinburg"));
-    calendarNow.setTimeInMillis(timezoneAlteredTime);
+    Calendar calendarNow = Calendar.getInstance(TimeZone.getTimeZone(tz));
+    calendarNow.setTimeInMillis(gmtTime);
 
     // Проверка установки даты
     if (calendar.getTimeInMillis() < calendarNow.getTimeInMillis()) {
@@ -59,9 +72,14 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
 
     Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
 
+    //получение даты для кварц
+    Date dateForNotifier = calendar.getTime();
+
     // Добавление напоминания
     startNewSession();
     session.getTransaction().begin();
+
+    int notifierID = 0;
 
     try {
       NotifiersEntity notify = new NotifiersEntity();
@@ -69,13 +87,74 @@ public class NotifyCommand extends HasSessionCommand implements ICommand {
       notify.setTaskId(taskID);
       notify.setNotifyAt(timestamp);
 
+      TasksEntity task = session.get(TasksEntity.class, taskID);
+
+      EntityManager entityManager = HibernateUtil.getSessionFactory().createEntityManager();
+
+      CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+      CriteriaQuery<UsersEntity> criteriaQuery =
+              criteriaBuilder.createQuery(UsersEntity.class);
+
+      Root<UsersEntity> root = criteriaQuery.from(UsersEntity.class);
+      criteriaQuery.select(root);
+
+      Predicate condition = criteriaBuilder.equal(root.get("id"), task.getOwnerId());
+      criteriaQuery.where(condition);
+
+      TypedQuery<UsersEntity> query = entityManager.createQuery(criteriaQuery);
+
+      UsersEntity user = query.getSingleResult();
+
+      System.out.println("USER:\n" + "a: " + user.getTgId() + "\nb: " + user.getChatId() + "\n");
+      chatID = String.valueOf(user.getChatId());
+
       session.save(notify);
       session.getTransaction().commit();
+
+      notifierID = notify.getId();    //получили ID напоминания
 
       session.close();
     } catch (Exception e) {
       System.err.printf("Такой задачи не существует \r\nERRMSG: %s", e.getMessage());
     }
+
+    // Навешивание Qwartz
+    try {
+      //новый триггер
+      TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
+
+      triggerBuilder.withIdentity(taskIdString, "tasks")
+              .startAt(dateForNotifier)
+              .withSchedule(
+                      SimpleScheduleBuilder
+                      .simpleSchedule()
+                      .withIntervalInMinutes(1)
+                      .withRepeatCount(0)
+              );
+
+      // Создание мапы для передачи taskID
+      JobDataMap dataMap = new JobDataMap();
+      dataMap.put("taskIDKey", String.valueOf(taskID));
+      dataMap.put("notifierID", String.valueOf(notifierID));
+      dataMap.put("chatID", chatID);
+
+      //что сделать (описано в файле notifierTask)
+      JobDetail job = JobBuilder.newJob(NotifierTask.class)
+              .withIdentity(taskIdString, "tasks")
+              .usingJobData(dataMap)
+              .build();
+
+      SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+      Scheduler scheduler = schedulerFactory.getScheduler();
+      // Постоянная проверка времени
+      scheduler.start();
+      // Выполнение задания
+      scheduler.scheduleJob(job, triggerBuilder.build());
+
+    } catch (SchedulerException e){
+      System.out.println("ERROR: Нельзя навесить более одного напоминания" + e.getMessage());
+    }
+
   }
 
   @Override
